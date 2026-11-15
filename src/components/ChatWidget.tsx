@@ -486,13 +486,13 @@ export function ChatWidget() {
   };
 
   return (
-    <div className="fixed bottom-4 right-4 z-40">
+    <div className="fixed bottom-4 right-4 z-40 lg:z-[55]">
       {!isOpen && (
         <button
           type="button"
           onClick={() => setIsOpen(true)}
           aria-label="Open live chat with Hisab Sutra"
-          className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-[#0B1F3A] hover:bg-[#132F54] text-white text-sm font-semibold shadow-lg border border-slate-700 transition-colors min-h-[44px] whitespace-nowrap"
+          className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl btn-primary text-white text-sm font-semibold shadow-lg border border-slate-700 transition-colors min-h-[44px] whitespace-nowrap"
         >
           <MessageSquare className="h-4 w-4 text-teal-300" aria-hidden="true" />
           <span>Chat with Us</span>
@@ -502,7 +502,7 @@ export function ChatWidget() {
       {isOpen && (
         <section
           aria-label="Hisab Sutra Live Chat"
-          className="w-[370px] max-w-[calc(100vw-2rem)] h-[540px] max-h-[82vh] bg-white border border-slate-200 rounded-xl shadow-2xl flex flex-col overflow-hidden"
+          className="w-[370px] max-w-[calc(100vw-2rem)] h-[540px] max-h-[82vh] card shadow-2xl flex flex-col overflow-hidden"
         >
           {/* Header */}
           <header className="bg-[#0B1F3A] text-white px-4 py-3 flex items-center justify-between gap-2 shrink-0">
@@ -721,7 +721,7 @@ export function ChatWidget() {
                   <button
                     type="submit"
                     disabled={meetingSubmitting}
-                    className="w-full py-2.5 text-xs font-semibold text-white bg-[#0B1F3A] hover:bg-[#132F54] disabled:opacity-60 rounded-lg min-h-[40px]"
+                    className="w-full py-2.5 text-xs font-semibold text-white btn-primary disabled:opacity-60 rounded-lg min-h-[40px]"
                   >
                     {meetingSubmitting ? 'Sending Request...' : 'Send Meeting Request'}
                   </button>
@@ -824,7 +824,7 @@ export function ChatWidget() {
               <button
                 type="submit"
                 disabled={startingChat}
-                className="w-full py-2.5 text-xs font-semibold text-white bg-[#0B1F3A] hover:bg-[#132F54] disabled:opacity-60 rounded-lg min-h-[40px]"
+                className="w-full py-2.5 text-xs font-semibold text-white btn-primary disabled:opacity-60 rounded-lg min-h-[40px]"
               >
                 {startingChat ? 'Starting Chat...' : 'Start Live Chat'}
               </button>
@@ -897,7 +897,7 @@ export function ChatWidget() {
                     type="submit"
                     disabled={sendingReply || !replyText.trim()}
                     aria-label="Send message"
-                    className="inline-flex items-center justify-center p-2 rounded-lg bg-[#0B1F3A] hover:bg-[#132F54] disabled:opacity-50 text-white min-h-[36px] min-w-[36px]"
+                    className="inline-flex items-center justify-center p-2 rounded-lg btn-primary disabled:opacity-50 text-white min-h-[36px] min-w-[36px]"
                   >
                     <Send className="h-3.5 w-3.5" aria-hidden="true" />
                   </button>

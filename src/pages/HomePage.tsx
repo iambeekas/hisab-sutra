@@ -14,11 +14,13 @@ import {
 import { trackEvent } from '../lib/analytics';
 import { CurrencyToggle } from '../components/CurrencyToggle';
 import { ImageWithFallback } from '../components/ImageWithFallback';
+import { IllustrativeBadge } from '../components/IllustrativeBadge';
 import { SeoHead } from '../components/SeoHead';
 
 export function HomePage() {
   const [currency, setCurrency] = useState<CurrencyCode>('GBP');
   const [openFaqIndex, setOpenFaqIndex] = useState<number | null>(0);
+  const realTestimonials = TESTIMONIAL_PLACEHOLDERS.filter((t) => !t.quote.trim().startsWith('['));
 
   return (
     <>
@@ -29,16 +31,18 @@ export function HomePage() {
       />
 
       {/* 1. Hero Section */}
-      <section className="bg-white border-b border-slate-200">
-        <div className="max-w-[1200px] mx-auto px-4 sm:px-6 py-12 sm:py-16 lg:py-20">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-stretch">
-            <div className="lg:col-span-6 flex flex-col justify-center space-y-6">
-              <p className="text-xs font-semibold tracking-wide text-teal-800">
-                Hisab Sutra · Formula for Next Generational Books
+      <section className="relative overflow-hidden border-b border-slate-200 bg-hero">
+        <div className="relative max-w-[1200px] mx-auto px-4 sm:px-6 pt-10 pb-10 sm:pt-14 sm:pb-12 lg:pt-14">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-center">
+            <div className="lg:col-span-7 space-y-6">
+              <p className="eyebrow">
+                <span className="h-1.5 w-1.5 rounded-full bg-teal-600" aria-hidden="true" />
+                Formula for Next Generational Books
               </p>
 
-              <h1 className="text-[clamp(2.15rem,4vw,3.5rem)] font-bold tracking-tight text-[#0B1F3A] leading-[1.1] text-balance">
-                ACCA-led accounting &amp; bookkeeping pods for UK, European, and Gulf teams.
+              <h1 className="text-[clamp(2.1rem,4vw,3.15rem)] font-extrabold tracking-tight text-[#0B1F3A] leading-[1.08] text-balance">
+                ACCA-led accounting &amp; bookkeeping pods for{' '}
+                <span className="text-teal-700">UK, European, and Gulf</span> teams.
               </h1>
 
               <p className="text-base sm:text-lg text-slate-600 leading-relaxed max-w-xl">
@@ -50,10 +54,8 @@ export function HomePage() {
               <div className="flex flex-wrap items-center gap-3 pt-2">
                 <Link
                   to="/contact?intent=call"
-                  onClick={() =>
-                    void trackEvent('cta_click', { label: 'hero_book_free_15min_call' })
-                  }
-                  className="inline-flex items-center justify-center gap-2 px-6 py-3 text-sm font-semibold text-white bg-[#0B1F3A] hover:bg-[#132F54] rounded-lg transition-colors min-h-[44px] whitespace-nowrap shrink-0 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-teal-700"
+                  onClick={() => void trackEvent('cta_click', { label: 'hero_book_free_15min_call' })}
+                  className="btn-primary inline-flex items-center justify-center gap-2 px-6 py-3 text-sm font-semibold rounded-xl min-h-[48px] whitespace-nowrap shrink-0"
                 >
                   Book a Free 15-Minute Call
                   <ArrowRight className="h-4 w-4" aria-hidden="true" />
@@ -61,63 +63,55 @@ export function HomePage() {
                 <Link
                   to="/contact"
                   onClick={() => void trackEvent('cta_click', { label: 'hero_get_a_quote' })}
-                  className="inline-flex items-center justify-center px-5 py-3 text-sm font-semibold text-[#0B1F3A] bg-white border border-slate-300 hover:bg-slate-50 rounded-lg transition-colors min-h-[44px] whitespace-nowrap shrink-0 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-teal-700"
+                  className="inline-flex items-center justify-center px-6 py-3 text-sm font-semibold text-[#0B1F3A] bg-white border border-slate-300 hover:border-[#0B1F3A] hover:bg-slate-50 rounded-xl transition-colors min-h-[48px] whitespace-nowrap shrink-0"
                 >
                   Get a Quote
                 </Link>
               </div>
             </div>
 
-            <div className="lg:col-span-6 flex">
-              <div className="w-full rounded-xl overflow-hidden border border-slate-200 bg-slate-100 aspect-[16/10] lg:aspect-auto">
-                <ImageWithFallback
-                  src={SITE_IMAGES.heroStudio}
-                  alt="Hisab Sutra accounting and financial advisory team working in Kathmandu studio"
-                  loading="eager"
-                  className="w-full h-full object-cover"
-                />
-              </div>
+            <div className="lg:col-span-5">
+              <figure className="relative">
+                <div className="relative rounded-2xl overflow-hidden ring-1 ring-slate-900/10 shadow-[0_28px_60px_-28px_rgb(11_31_58/0.45)] aspect-[5/4] bg-slate-100">
+                  <ImageWithFallback
+                    src={SITE_IMAGES.heroStudio}
+                    alt="Illustration of an ACCA-led accounting team working in a Kathmandu office"
+                    loading="eager"
+                    width={1200}
+                    height={670}
+                    className="w-full h-full object-cover"
+                  />
+                  <IllustrativeBadge />
+                </div>
+                <div className="absolute -bottom-5 right-4 sm:right-8 card flex items-center gap-3 px-4 py-3">
+                  <FileCheck2 className="h-5 w-5 text-teal-700 shrink-0" aria-hidden="true" />
+                  <p className="text-xs leading-snug text-slate-600">
+                    <span className="block text-sm font-semibold text-[#0B1F3A]">ACCA-led review</span>
+                    Every monthly close
+                  </p>
+                </div>
+              </figure>
             </div>
           </div>
 
           {/* 2. Trust Bar */}
-          <div className="mt-12 pt-8 border-t border-slate-200 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-            <div className="flex items-start gap-3">
-              <FileCheck2 className="h-5 w-5 text-teal-700 mt-0.5 shrink-0" aria-hidden="true" />
-              <div>
-                <p className="text-sm font-semibold text-[#0B1F3A]">ACCA-Led Review</p>
-                <p className="text-xs text-slate-600 mt-0.5">
-                  Monthly reporting supervised by qualified ACCA members.
-                </p>
+          <div className="card mt-14 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 divide-y sm:divide-y-0 lg:divide-x divide-slate-200">
+            {[
+              { Icon: FileCheck2, title: 'ACCA-Led Review', text: 'Monthly reporting supervised by qualified ACCA members.' },
+              { Icon: Lock, title: 'GDPR & Strict NDA', text: 'EU/UK database residency; documents exchanged by email only.' },
+              { Icon: Clock, title: 'Direct Time-Zone Overlap', text: 'Live working overlap across Gulf, European, and UK morning hours.' },
+              { Icon: Globe2, title: 'Cloud Ledger Native', text: 'Xero · QuickBooks · Sage · Zoho Books · Excel' },
+            ].map(({ Icon, title, text }) => (
+              <div key={title} className="flex items-start gap-3 p-5">
+                <span className="grid h-9 w-9 shrink-0 place-items-center rounded-lg bg-teal-50 text-teal-700">
+                  <Icon className="h-[18px] w-[18px]" aria-hidden="true" />
+                </span>
+                <div>
+                  <p className="text-sm font-semibold text-[#0B1F3A]">{title}</p>
+                  <p className="text-xs text-slate-600 mt-0.5 leading-relaxed">{text}</p>
+                </div>
               </div>
-            </div>
-            <div className="flex items-start gap-3">
-              <Lock className="h-5 w-5 text-teal-700 mt-0.5 shrink-0" aria-hidden="true" />
-              <div>
-                <p className="text-sm font-semibold text-[#0B1F3A]">GDPR &amp; Strict NDA</p>
-                <p className="text-xs text-slate-600 mt-0.5">
-                  EU/UK database residency; documents exchanged by email only.
-                </p>
-              </div>
-            </div>
-            <div className="flex items-start gap-3">
-              <Clock className="h-5 w-5 text-teal-700 mt-0.5 shrink-0" aria-hidden="true" />
-              <div>
-                <p className="text-sm font-semibold text-[#0B1F3A]">Direct Time-Zone Overlap</p>
-                <p className="text-xs text-slate-600 mt-0.5">
-                  Live working overlap across Gulf, European, and UK morning hours.
-                </p>
-              </div>
-            </div>
-            <div className="flex items-start gap-3">
-              <Globe2 className="h-5 w-5 text-teal-700 mt-0.5 shrink-0" aria-hidden="true" />
-              <div>
-                <p className="text-sm font-semibold text-[#0B1F3A]">Cloud Ledger Native</p>
-                <p className="text-xs text-slate-600 mt-0.5">
-                  Xero · QuickBooks · Sage · Zoho Books · Excel
-                </p>
-              </div>
-            </div>
+            ))}
           </div>
         </div>
       </section>
@@ -127,7 +121,7 @@ export function HomePage() {
         <div className="max-w-[1200px] mx-auto px-4 sm:px-6 space-y-10">
           <div className="flex flex-col md:flex-row md:items-end justify-between gap-4">
             <div className="space-y-2 max-w-2xl">
-              <h2 className="text-2xl sm:text-3xl font-bold tracking-tight text-[#0B1F3A] text-balance">
+              <h2 className="section-heading text-2xl sm:text-[2rem] text-balance">
                 Core Outsourcing Services
               </h2>
               <p className="text-slate-600 text-base">
@@ -144,12 +138,10 @@ export function HomePage() {
           </div>
 
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
-            {SERVICES.map((service, idx) => (
+            {SERVICES.map((service) => (
               <article
                 key={service.id}
-                className={`bg-white border border-slate-200 rounded-xl p-6 sm:p-7 flex flex-col justify-between space-y-6 ${
-                  idx === 0 ? 'lg:col-span-5' : idx === 1 ? 'lg:col-span-4' : 'lg:col-span-3'
-                }`}
+                className="card card-hover p-6 sm:p-7 flex flex-col justify-between space-y-6 lg:col-span-4"
               >
                 <div className="space-y-3">
                   <p className="text-xs font-mono font-semibold text-teal-700 tabular-nums">
@@ -189,7 +181,7 @@ export function HomePage() {
       <section className="py-16 sm:py-20 bg-white border-b border-slate-200">
         <div className="max-w-[1200px] mx-auto px-4 sm:px-6 space-y-10">
           <div className="max-w-2xl space-y-2">
-            <h2 className="text-2xl sm:text-3xl font-bold tracking-tight text-[#0B1F3A] text-balance">
+            <h2 className="section-heading text-2xl sm:text-[2rem] text-balance">
               How Onboarding &amp; Monthly Execution Work
             </h2>
             <p className="text-slate-600">
@@ -201,10 +193,10 @@ export function HomePage() {
             {HOW_IT_WORKS_STEPS.map((item) => (
               <div
                 key={item.step}
-                className="border border-slate-200 rounded-xl p-6 bg-slate-50/60 space-y-3"
+                className="card card-hover p-6 space-y-3"
               >
-                <span className="inline-block font-mono text-sm font-semibold text-teal-700 tabular-nums">
-                  Step {item.step}
+                <span className="grid h-9 w-9 place-items-center rounded-full bg-[#0B1F3A] font-mono text-sm font-semibold text-teal-300 tabular-nums">
+                  {item.step}
                 </span>
                 <h3 className="text-base font-bold text-[#0B1F3A]">{item.title}</h3>
                 <p className="text-sm text-slate-600 leading-relaxed">{item.description}</p>
@@ -219,7 +211,7 @@ export function HomePage() {
         <div className="max-w-[1200px] mx-auto px-4 sm:px-6 space-y-10">
           <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4">
             <div className="space-y-2 max-w-xl">
-              <h2 className="text-2xl sm:text-3xl font-bold tracking-tight text-[#0B1F3A] text-balance">
+              <h2 className="section-heading text-2xl sm:text-[2rem] text-balance">
                 Transparent Monthly Engagement Tiers
               </h2>
               <p className="text-slate-600 text-sm sm:text-base">
@@ -237,12 +229,15 @@ export function HomePage() {
               return (
                 <div
                   key={tier.id}
-                  className={`rounded-xl p-6 sm:p-7 flex flex-col justify-between space-y-6 bg-white ${
-                    tier.highlighted
-                      ? 'border-2 border-[#0B1F3A]'
-                      : 'border border-slate-200'
+                  className={`card relative p-6 sm:p-7 flex flex-col justify-between space-y-6 ${
+                    tier.highlighted ? 'ring-2 ring-[#0B1F3A] shadow-[0_22px_44px_-20px_rgb(11_31_58/0.35)]' : ''
                   }`}
                 >
+                  {tier.highlighted && (
+                    <span className="absolute -top-3 left-6 rounded-full bg-[#0B1F3A] px-3 py-1 text-[11px] font-semibold text-teal-300">
+                      Recommended
+                    </span>
+                  )}
                   <div className="space-y-4">
                     <div>
                       <p className="text-xs font-medium text-teal-800">{tier.audience}</p>
@@ -298,11 +293,12 @@ export function HomePage() {
         </div>
       </section>
 
-      {/* 6. Testimonials Placeholder */}
-      <section className="py-16 sm:py-20 bg-white border-b border-slate-200">
+      {/* 6. Testimonials (shown only once real quotes replace the [placeholders] in siteData.ts) */}
+      {realTestimonials.length > 0 && (
+        <section className="py-16 sm:py-20 bg-white border-b border-slate-200">
         <div className="max-w-[1200px] mx-auto px-4 sm:px-6 space-y-8">
           <div className="max-w-2xl space-y-2">
-            <h2 className="text-2xl sm:text-3xl font-bold tracking-tight text-[#0B1F3A]">
+            <h2 className="section-heading text-2xl sm:text-[2rem]">
               Client &amp; Practice Partner Perspectives
             </h2>
             <p className="text-sm text-slate-600">
@@ -311,7 +307,7 @@ export function HomePage() {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            {TESTIMONIAL_PLACEHOLDERS.map((item, idx) => (
+            {realTestimonials.map((item, idx) => (
               <blockquote
                 key={idx}
                 className="bg-slate-50 border border-slate-200 rounded-xl p-6 sm:p-7 flex flex-col justify-between space-y-5"
@@ -329,13 +325,14 @@ export function HomePage() {
           </div>
         </div>
       </section>
+      )}
 
       {/* 7. FAQ Preview */}
       <section className="py-16 sm:py-20 bg-slate-50 border-b border-slate-200">
         <div className="max-w-[1200px] mx-auto px-4 sm:px-6">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-10">
             <div className="lg:col-span-4 space-y-3">
-              <h2 className="text-2xl sm:text-3xl font-bold tracking-tight text-[#0B1F3A]">
+              <h2 className="section-heading text-2xl sm:text-[2rem]">
                 Frequently Asked Questions
               </h2>
               <p className="text-sm text-slate-600 leading-relaxed">
@@ -357,7 +354,7 @@ export function HomePage() {
                 return (
                   <div
                     key={faq.question}
-                    className="bg-white border border-slate-200 rounded-xl overflow-hidden"
+                    className="card overflow-hidden"
                   >
                     <button
                       type="button"

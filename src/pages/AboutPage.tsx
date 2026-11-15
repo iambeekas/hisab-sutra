@@ -2,7 +2,10 @@ import { Link } from 'react-router-dom';
 import { ArrowRight, CheckCircle2 } from 'lucide-react';
 import { SITE_IMAGES, TEAM_MEMBERS, TIMEZONE_OVERLAP } from '../data/siteData';
 import { ImageWithFallback } from '../components/ImageWithFallback';
+import { IllustrativeBadge } from '../components/IllustrativeBadge';
 import { SeoHead } from '../components/SeoHead';
+
+const isPlaceholder = (value: string) => value.trim().startsWith('[');
 
 export function AboutPage() {
   return (
@@ -30,7 +33,7 @@ export function AboutPage() {
             <div className="pt-2">
               <Link
                 to="/contact"
-                className="inline-flex items-center gap-2 px-5 py-2.5 text-sm font-semibold text-white bg-[#0B1F3A] hover:bg-[#132F54] rounded-lg transition-colors min-h-[44px]"
+                className="inline-flex items-center gap-2 px-5 py-2.5 text-sm font-semibold text-white btn-primary rounded-lg transition-colors min-h-[44px]"
               >
                 Schedule an Introduction Call
                 <ArrowRight className="h-4 w-4" aria-hidden="true" />
@@ -39,12 +42,15 @@ export function AboutPage() {
           </div>
 
           <div className="lg:col-span-6">
-            <div className="rounded-xl overflow-hidden border border-slate-200 aspect-[16/9]">
+            <div className="relative rounded-2xl overflow-hidden ring-1 ring-slate-900/10 shadow-[0_22px_44px_-20px_rgb(11_31_58/0.32)] aspect-[16/9]">
               <ImageWithFallback
                 src={SITE_IMAGES.kathmanduOffice}
-                alt="Hisab Sutra Kathmandu workspace overlooking Himalayan foothills"
+                alt="Illustration of a Kathmandu accounting workspace overlooking Himalayan foothills"
+                width={1200}
+                height={670}
                 className="w-full h-full object-cover"
               />
+              <IllustrativeBadge />
             </div>
           </div>
         </div>
@@ -58,8 +64,8 @@ export function AboutPage() {
               Leadership &amp; ACCA Credentials
             </h2>
             <p className="text-sm sm:text-base text-slate-600">
-              We publish only verifiable credentials held by active team members. Update the
-              bracketed placeholders below with exact names and ACCA member numbers prior to launch.
+              Engagements are led by ACCA-qualified professionals. Named profiles and membership
+              details are published here once verified.
             </p>
           </div>
 
@@ -67,22 +73,37 @@ export function AboutPage() {
             {TEAM_MEMBERS.map((member) => (
               <article
                 key={member.role}
-                className="bg-white border border-slate-200 rounded-xl p-6 flex flex-col sm:flex-row gap-5 items-start"
+                className="card p-6 flex flex-col sm:flex-row gap-5 items-start"
               >
-                <div className="w-24 h-24 rounded-xl overflow-hidden border border-slate-200 shrink-0">
-                  <ImageWithFallback
-                    src={member.image}
-                    alt={member.name}
-                    className="w-full h-full object-cover"
-                  />
+                <div className="shrink-0">
+                  <div className="w-24 h-24 rounded-xl overflow-hidden ring-1 ring-slate-900/10">
+                    <ImageWithFallback
+                      src={member.image}
+                      alt="Illustrative portrait"
+                      width={96}
+                      height={96}
+                      className="w-full h-full object-cover"
+                    />
+                  </div>
+                  <p className="mt-1.5 text-center text-[10px] font-medium text-slate-500">
+                    Illustrative portrait
+                  </p>
                 </div>
                 <div className="space-y-2">
                   <div>
-                    <h3 className="text-lg font-bold text-[#0B1F3A]">{member.name}</h3>
-                    <p className="text-sm font-medium text-teal-800">{member.role}</p>
-                    <p className="text-xs font-mono text-slate-500 mt-0.5">{member.credential}</p>
+                    <h3 className="text-lg font-bold text-[#0B1F3A]">
+                      {isPlaceholder(member.name) ? member.role : member.name}
+                    </h3>
+                    {!isPlaceholder(member.name) && (
+                      <p className="text-sm font-medium text-teal-800">{member.role}</p>
+                    )}
+                    {!isPlaceholder(member.credential) && (
+                      <p className="text-xs font-mono text-slate-500 mt-0.5">{member.credential}</p>
+                    )}
                   </div>
-                  <p className="text-sm text-slate-600 leading-relaxed">{member.bio}</p>
+                  {!isPlaceholder(member.bio) && (
+                    <p className="text-sm text-slate-600 leading-relaxed">{member.bio}</p>
+                  )}
                 </div>
               </article>
             ))}
@@ -94,7 +115,7 @@ export function AboutPage() {
       <section className="py-14 sm:py-16 bg-white">
         <div className="max-w-[1200px] mx-auto px-4 sm:px-6 space-y-12">
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-            <div className="border border-slate-200 rounded-xl p-6 space-y-2">
+            <div className="card p-6 space-y-2">
               <CheckCircle2 className="h-5 w-5 text-teal-700" aria-hidden="true" />
               <h3 className="text-lg font-bold text-[#0B1F3A]">Sustainable Cost Advantage</h3>
               <p className="text-sm text-slate-600 leading-relaxed">
@@ -103,7 +124,7 @@ export function AboutPage() {
                 ACCA rigor.
               </p>
             </div>
-            <div className="border border-slate-200 rounded-xl p-6 space-y-2">
+            <div className="card p-6 space-y-2">
               <CheckCircle2 className="h-5 w-5 text-teal-700" aria-hidden="true" />
               <h3 className="text-lg font-bold text-[#0B1F3A]">Skilled ACCA Talent Pipeline</h3>
               <p className="text-sm text-slate-600 leading-relaxed">
@@ -111,7 +132,7 @@ export function AboutPage() {
                 and finance graduates trained in international reporting standards and cloud ledgers.
               </p>
             </div>
-            <div className="border border-slate-200 rounded-xl p-6 space-y-2">
+            <div className="card p-6 space-y-2">
               <CheckCircle2 className="h-5 w-5 text-teal-700" aria-hidden="true" />
               <h3 className="text-lg font-bold text-[#0B1F3A]">Strategic Time-Zone Overlap</h3>
               <p className="text-sm text-slate-600 leading-relaxed">

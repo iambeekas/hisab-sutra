@@ -142,7 +142,7 @@ export function PricingPage() {
           </div>
 
           {/* Scope Comparison Matrix */}
-          <div className="bg-white border border-slate-200 rounded-xl overflow-hidden">
+          <div className="card overflow-hidden">
             <div className="px-6 py-5 border-b border-slate-200">
               <h2 className="text-lg font-bold text-[#0B1F3A]">Package Scope Matrix</h2>
               <p className="text-xs text-slate-600 mt-1">

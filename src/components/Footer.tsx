@@ -23,7 +23,7 @@ export function Footer() {
               Nepal—supporting SMEs and accounting firms across the UK, Europe, and the Gulf.
             </p>
             <p className="text-xs text-slate-400 pt-1">
-              [Kathmandu Registered Office Address Placeholder] · [hello@hisabsutra.com Placeholder]
+              Kathmandu, Nepal
             </p>
           </div>
 

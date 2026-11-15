@@ -22,7 +22,7 @@ export function Header() {
   };
 
   return (
-    <header className="sticky top-0 z-40 bg-white/95 backdrop-blur-sm border-b border-slate-200">
+    <header className="sticky top-0 z-40 bg-white/85 backdrop-blur-md border-b border-slate-200/80">
       <div className="max-w-[1200px] mx-auto px-4 sm:px-6 h-16 flex items-center justify-between gap-8">
         {/* Zone 1: Single clean wordmark */}
         <Link
@@ -30,7 +30,15 @@ export function Header() {
           onClick={() => setMobileOpen(false)}
           className="text-lg font-bold tracking-tight text-[#0B1F3A] whitespace-nowrap shrink-0 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-teal-700 rounded-sm"
         >
-          Hisab Sutra
+          <span className="inline-flex items-center gap-2.5">
+            <span
+              aria-hidden="true"
+              className="grid h-8 w-8 place-items-center rounded-lg bg-[#0B1F3A] text-[13px] font-extrabold tracking-tight text-teal-300"
+            >
+              HS
+            </span>
+            Hisab Sutra
+          </span>
         </Link>
 
         {/* Zone 2: Concise single-line text navigation links */}
@@ -60,7 +68,7 @@ export function Header() {
           <button
             type="button"
             onClick={handlePrimaryCta}
-            className="hidden md:inline-flex items-center justify-center px-4 py-2 text-sm font-semibold text-white bg-[#0B1F3A] hover:bg-[#132F54] rounded-lg transition-colors whitespace-nowrap shrink-0 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-teal-700"
+            className="hidden md:inline-flex items-center justify-center px-4 py-2 text-sm font-semibold text-white btn-primary rounded-lg transition-colors whitespace-nowrap shrink-0 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-teal-700"
           >
             Get a Quote
           </button>
@@ -100,7 +108,7 @@ export function Header() {
             <button
               type="button"
               onClick={handlePrimaryCta}
-              className="mt-2 w-full px-4 py-2.5 text-sm font-semibold text-white bg-[#0B1F3A] hover:bg-[#132F54] rounded-lg transition-colors min-h-[44px]"
+              className="mt-2 w-full px-4 py-2.5 text-sm font-semibold text-white btn-primary rounded-lg transition-colors min-h-[44px]"
             >
               Get a Quote
             </button>

@@ -2,4 +2,4 @@ User-agent: *
 Allow: /
 Disallow: /admin
 
-Sitemap: https://hisabsutra.com/sitemap.xml
+Sitemap: https://hisabsutra.bikasb.com.np/sitemap.xml

@@ -35,7 +35,7 @@ export function ContactPage() {
       <section className="py-14 sm:py-16 bg-slate-50">
         <div className="max-w-[1200px] mx-auto px-4 sm:px-6 grid grid-cols-1 lg:grid-cols-12 gap-10 items-start">
           <div className="lg:col-span-5 space-y-6">
-            <div className="bg-white border border-slate-200 rounded-xl p-6 space-y-5">
+            <div className="card p-6 space-y-5">
               <h2 className="text-lg font-bold text-[#0B1F3A]">Practice Contact Details</h2>
 
               <div className="space-y-4 text-sm text-slate-600">
@@ -43,15 +43,7 @@ export function ContactPage() {
                   <MapPin className="h-4 w-4 text-teal-700 mt-1 shrink-0" aria-hidden="true" />
                   <div>
                     <p className="font-semibold text-[#0B1F3A]">Kathmandu Delivery Office</p>
-                    <p>[Street Address, Ward No., Kathmandu, Nepal Placeholder]</p>
-                  </div>
-                </div>
-
-                <div className="flex items-start gap-3">
-                  <Mail className="h-4 w-4 text-teal-700 mt-1 shrink-0" aria-hidden="true" />
-                  <div>
-                    <p className="font-semibold text-[#0B1F3A]">New Engagement Desk</p>
-                    <p>[hello@hisabsutra.com Placeholder]</p>
+                    <p>Kathmandu, Nepal</p>
                   </div>
                 </div>
 
@@ -73,7 +65,7 @@ export function ContactPage() {
               </div>
             </div>
 
-            <div className="bg-white border border-slate-200 rounded-xl p-6 space-y-2">
+            <div className="card p-6 space-y-2">
               <div className="flex items-center gap-2 text-sm font-semibold text-[#0B1F3A]">
                 <ShieldCheck className="h-4 w-4 text-teal-700 shrink-0" aria-hidden="true" />
                 <span>GDPR &amp; Confidentiality Notice</span>

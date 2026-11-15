@@ -59,15 +59,15 @@ export function CookieBanner() {
       {!prefs.decided && !settingsOpen && (
         <aside
           aria-label="Cookie consent banner"
-          className="fixed bottom-4 left-4 right-4 z-50 max-w-3xl mx-auto bg-white border border-slate-200 rounded-xl shadow-lg p-4 sm:p-5"
+          className="fixed inset-x-0 bottom-0 z-50 border-t border-slate-200 bg-white/95 backdrop-blur-md shadow-[0_-10px_30px_-12px_rgb(11_31_58/0.25)]"
         >
-          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
-            <div className="space-y-1">
+          <div className="max-w-[1200px] mx-auto px-4 sm:px-6 py-3 flex flex-col gap-3 lg:flex-row lg:items-center lg:justify-between lg:pr-44">
+            <div className="space-y-1 min-w-0 lg:flex-1">
               <div className="flex items-center gap-2 text-sm font-semibold text-[#0B1F3A]">
                 <ShieldCheck className="h-4 w-4 text-teal-700 shrink-0" aria-hidden="true" />
                 <span>Your Privacy &amp; Cookie Preferences</span>
               </div>
-              <p className="text-xs sm:text-sm text-slate-600 leading-relaxed">
+              <p className="text-xs sm:text-[13px] text-slate-600 leading-relaxed">
                 We use strictly necessary storage for session attribution and security. Optional
                 analytics cookies help us measure page views and inquiry conversions—never loaded
                 until you accept. Read our{' '}
@@ -78,7 +78,7 @@ export function CookieBanner() {
               </p>
             </div>
 
-            <div className="flex flex-wrap sm:flex-nowrap items-center gap-2 shrink-0">
+            <div className="flex flex-wrap lg:flex-nowrap items-center gap-2 shrink-0">
               <button
                 type="button"
                 onClick={() => {
@@ -100,7 +100,7 @@ export function CookieBanner() {
               <button
                 type="button"
                 onClick={handleAcceptAll}
-                className="px-4 py-2 text-xs font-semibold text-white bg-[#0B1F3A] hover:bg-[#132F54] rounded-lg transition-colors whitespace-nowrap shrink-0 min-h-[40px]"
+                className="px-4 py-2 text-xs font-semibold text-white btn-primary rounded-lg transition-colors whitespace-nowrap shrink-0 min-h-[40px]"
               >
                 Accept all
               </button>
@@ -116,7 +116,7 @@ export function CookieBanner() {
           aria-labelledby="cookie-settings-title"
           className="fixed inset-0 z-50 bg-slate-950/50 backdrop-blur-xs flex items-center justify-center p-4"
         >
-          <div className="bg-white border border-slate-200 rounded-xl shadow-xl w-full max-w-lg p-6 space-y-5">
+          <div className="card shadow-xl w-full max-w-lg p-6 space-y-5">
             <div className="flex items-start justify-between gap-4">
               <div>
                 <h2 id="cookie-settings-title" className="text-lg font-semibold text-[#0B1F3A]">
@@ -182,7 +182,7 @@ export function CookieBanner() {
               <button
                 type="button"
                 onClick={handleAcceptAll}
-                className="px-4 py-2 text-xs font-semibold text-white bg-[#0B1F3A] hover:bg-[#132F54] rounded-lg min-h-[40px]"
+                className="px-4 py-2 text-xs font-semibold text-white btn-primary rounded-lg min-h-[40px]"
               >
                 Accept all
               </button>

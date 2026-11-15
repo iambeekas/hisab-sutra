@@ -63,7 +63,7 @@ export function FaqPage() {
             return (
               <div
                 key={item.question}
-                className="bg-white border border-slate-200 rounded-xl overflow-hidden"
+                className="card overflow-hidden"
               >
                 <button
                   type="button"
@@ -99,7 +99,7 @@ export function FaqPage() {
             <p className="text-sm text-slate-600 mb-3">Have a specific question about your ledger?</p>
             <Link
               to="/contact"
-              className="inline-flex items-center justify-center px-5 py-2.5 text-sm font-semibold text-white bg-[#0B1F3A] hover:bg-[#132F54] rounded-lg min-h-[44px]"
+              className="inline-flex items-center justify-center px-5 py-2.5 text-sm font-semibold text-white btn-primary rounded-lg min-h-[44px]"
             >
               Contact Our Team
             </Link>
