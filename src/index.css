@@ -4,16 +4,31 @@
   --font-display: "Plus Jakarta Sans", ui-sans-serif, system-ui, sans-serif;
   --font-sans: "Public Sans", ui-sans-serif, system-ui, sans-serif;
   --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, monospace;
+
+  --color-navy-950: #071426;
+  --color-navy-900: #0b1f3a;
+  --color-navy-800: #132f54;
+
+  --shadow-card: 0 1px 2px rgb(11 31 58 / 0.05), 0 14px 32px -18px rgb(11 31 58 / 0.2);
+  --shadow-lift: 0 2px 4px rgb(11 31 58 / 0.06), 0 22px 44px -20px rgb(11 31 58 / 0.32);
 }
 
 @layer base {
   html {
     font-family: var(--font-sans);
     scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
   }
 
   h1, h2, h3, h4, h5, h6 {
     font-family: var(--font-display);
+    letter-spacing: -0.02em;
+  }
+
+  :focus-visible {
+    outline: 2px solid #0f766e;
+    outline-offset: 2px;
   }
 
   @media (prefers-reduced-motion: reduce) {
@@ -25,6 +40,69 @@
       animation-iteration-count: 1 !important;
       transition-duration: 0.01ms !important;
     }
+  }
+}
+
+@layer components {
+  .card {
+    background: #fff;
+    border: 1px solid rgb(15 23 42 / 0.08);
+    border-radius: 1rem;
+    box-shadow: var(--shadow-card);
+  }
+
+  .card-hover {
+    transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+  }
+  .card-hover:hover {
+    transform: translateY(-3px);
+    box-shadow: var(--shadow-lift);
+    border-color: rgb(15 118 110 / 0.35);
+  }
+
+  .btn-primary {
+    background: var(--color-navy-900);
+    color: #fff;
+    box-shadow: 0 1px 2px rgb(11 31 58 / 0.25);
+    transition: background-color 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease;
+  }
+  .btn-primary:hover {
+    background: var(--color-navy-800);
+    box-shadow: 0 10px 22px -10px rgb(11 31 58 / 0.6);
+    transform: translateY(-1px);
+  }
+  .btn-primary:disabled {
+    transform: none;
+    box-shadow: none;
+  }
+
+  .eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    border-radius: 9999px;
+    border: 1px solid rgb(15 118 110 / 0.22);
+    background: #f0fdfa;
+    padding: 0.3rem 0.8rem;
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: #115e59;
+  }
+
+  .bg-hero {
+    background-color: #fff;
+    background-image:
+      radial-gradient(60rem 28rem at 85% -10%, rgb(45 212 191 / 0.14), transparent 60%),
+      radial-gradient(48rem 24rem at -10% 10%, rgb(11 31 58 / 0.06), transparent 60%),
+      linear-gradient(rgb(11 31 58 / 0.035) 1px, transparent 1px),
+      linear-gradient(90deg, rgb(11 31 58 / 0.035) 1px, transparent 1px);
+    background-size: auto, auto, 44px 44px, 44px 44px;
+  }
+
+  .section-heading {
+    font-weight: 800;
+    letter-spacing: -0.025em;
+    color: var(--color-navy-900);
   }
 }
 

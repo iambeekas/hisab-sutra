@@ -6,6 +6,8 @@ interface ImageWithFallbackProps {
   alt: string;
   className?: string;
   loading?: 'eager' | 'lazy';
+  width?: number;
+  height?: number;
 }
 
 export function ImageWithFallback({
@@ -13,6 +15,8 @@ export function ImageWithFallback({
   alt,
   className = '',
   loading = 'lazy',
+  width,
+  height,
 }: ImageWithFallbackProps) {
   const [hasError, setHasError] = useState(false);
 
@@ -33,8 +37,11 @@ export function ImageWithFallback({
     <img
       src={src}
       alt={alt}
+      width={width}
+      height={height}
       loading={loading}
-      referrerPolicy="no-referrer"
+      decoding="async"
+      fetchPriority={loading === 'eager' ? 'high' : 'auto'}
       onError={() => setHasError(true)}
       className={className}
     />

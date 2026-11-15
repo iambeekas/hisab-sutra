@@ -179,7 +179,7 @@ export function LeadForm({ defaultService = 'Bookkeeping', defaultTierNote = '' 
 
   if (submittedId) {
     return (
-      <div className="bg-white border border-slate-200 rounded-xl p-6 sm:p-8 space-y-4">
+      <div className="card p-6 sm:p-8 space-y-4">
         <div className="inline-flex items-center justify-center h-11 w-11 rounded-lg bg-teal-50 text-teal-700">
           <CheckCircle2 className="h-6 w-6" aria-hidden="true" />
         </div>
@@ -217,7 +217,7 @@ export function LeadForm({ defaultService = 'Bookkeeping', defaultTierNote = '' 
       onSubmit={handleSubmit}
       onFocus={markFormStart}
       noValidate
-      className="bg-white border border-slate-200 rounded-xl p-6 sm:p-8 space-y-5"
+      className="card p-6 sm:p-8 space-y-5"
     >
       <div className="space-y-1">
         <h3 className="text-xl font-bold text-[#0B1F3A]">Request a Tailored Quote</h3>
@@ -425,7 +425,7 @@ export function LeadForm({ defaultService = 'Bookkeeping', defaultTierNote = '' 
         <button
           type="submit"
           disabled={submitting}
-          className="px-6 py-3 text-sm font-semibold text-white bg-[#0B1F3A] hover:bg-[#132F54] disabled:opacity-60 rounded-lg transition-colors min-h-[44px] whitespace-nowrap shrink-0 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-teal-700"
+          className="px-6 py-3 text-sm font-semibold text-white btn-primary disabled:opacity-60 rounded-lg transition-colors min-h-[44px] whitespace-nowrap shrink-0 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-teal-700"
         >
           {submitting ? 'Submitting Request...' : 'Request a Quote'}
         </button>

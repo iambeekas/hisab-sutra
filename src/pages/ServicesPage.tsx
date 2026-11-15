@@ -32,7 +32,7 @@ export function ServicesPage() {
             <article
               key={service.id}
               id={service.id}
-              className="bg-white border border-slate-200 rounded-xl p-6 sm:p-10 space-y-8 scroll-mt-24"
+              className="card p-6 sm:p-10 space-y-8 scroll-mt-24"
             >
               <div className="flex flex-col lg:flex-row lg:items-start justify-between gap-6 pb-6 border-b border-slate-200">
                 <div className="space-y-2 max-w-2xl">
@@ -109,7 +109,7 @@ export function ServicesPage() {
                       onClick={() =>
                         void trackEvent('cta_click', { label: `services_quote_${service.id}` })
                       }
-                      className="inline-flex items-center gap-2 px-5 py-2.5 text-sm font-semibold text-white bg-[#0B1F3A] hover:bg-[#132F54] rounded-lg transition-colors min-h-[44px]"
+                      className="inline-flex items-center gap-2 px-5 py-2.5 text-sm font-semibold text-white btn-primary rounded-lg transition-colors min-h-[44px]"
                     >
                       Request a Quote for {service.title.split(' ')[0]}
                       <ArrowRight className="h-4 w-4" aria-hidden="true" />

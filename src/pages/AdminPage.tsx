@@ -499,7 +499,7 @@ export function AdminPage() {
     return (
       <section className="py-16 bg-slate-50 min-h-[60vh]">
         <div className="max-w-[1200px] mx-auto px-4 sm:px-6">
-          <div className="h-32 bg-white border border-slate-200 rounded-xl animate-pulse" />
+          <div className="h-32 card animate-pulse" />
         </div>
       </section>
     );
@@ -514,7 +514,7 @@ export function AdminPage() {
           canonicalPath="/admin"
         />
         <section className="py-20 bg-slate-50 min-h-[70vh] flex items-center justify-center px-4">
-          <div className="bg-white border border-slate-200 rounded-xl p-8 max-w-md w-full space-y-5">
+          <div className="card p-8 max-w-md w-full space-y-5">
             <div className="space-y-1.5">
               <p className="text-xs font-semibold text-teal-800">Restricted Access</p>
               <h1 className="text-2xl font-bold text-[#0B1F3A]">Hisab Sutra Admin Console</h1>
@@ -533,7 +533,7 @@ export function AdminPage() {
             <button
               type="button"
               onClick={handleGoogleLogin}
-              className="w-full inline-flex items-center justify-center gap-2 px-5 py-3 text-sm font-semibold text-white bg-[#0B1F3A] hover:bg-[#132F54] rounded-lg transition-colors min-h-[44px]"
+              className="w-full inline-flex items-center justify-center gap-2 px-5 py-3 text-sm font-semibold text-white btn-primary rounded-lg transition-colors min-h-[44px]"
             >
               <LogIn className="h-4 w-4" aria-hidden="true" />
               Sign in with Google
@@ -553,7 +553,7 @@ export function AdminPage() {
           canonicalPath="/admin"
         />
         <section className="py-20 bg-slate-50 min-h-[70vh] flex items-center justify-center px-4">
-          <div className="bg-white border border-slate-200 rounded-xl p-8 max-w-md w-full space-y-4">
+          <div className="card p-8 max-w-md w-full space-y-4">
             <div className="inline-flex items-center justify-center h-10 w-10 rounded-lg bg-red-50 text-red-700">
               <ShieldAlert className="h-5 w-5" aria-hidden="true" />
             </div>
@@ -611,25 +611,25 @@ export function AdminPage() {
         <div className="max-w-[1200px] mx-auto px-4 sm:px-6 space-y-6">
           {/* Summary metrics */}
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
-            <div className="bg-white border border-slate-200 rounded-xl p-5">
+            <div className="card p-5">
               <p className="text-xs text-slate-500">Total Leads</p>
               <p className="text-2xl font-bold text-[#0B1F3A] font-mono tabular-nums mt-1">
                 {counts.totalLeads}
               </p>
             </div>
-            <div className="bg-white border border-slate-200 rounded-xl p-5">
+            <div className="card p-5">
               <p className="text-xs text-slate-500">Unread Live Chats</p>
               <p className="text-2xl font-bold text-teal-700 font-mono tabular-nums mt-1">
                 {counts.unreadChats}
               </p>
             </div>
-            <div className="bg-white border border-slate-200 rounded-xl p-5">
+            <div className="card p-5">
               <p className="text-xs text-slate-500">Pending Meetings</p>
               <p className="text-2xl font-bold text-amber-700 font-mono tabular-nums mt-1">
                 {counts.pendingMeetings}
               </p>
             </div>
-            <div className="bg-white border border-slate-200 rounded-xl p-5">
+            <div className="card p-5">
               <p className="text-xs text-slate-500">Consented Events</p>
               <p className="text-2xl font-bold text-[#0B1F3A] font-mono tabular-nums mt-1">
                 {counts.eventsCount}
@@ -729,7 +729,7 @@ export function AdminPage() {
                 </div>
               </div>
 
-              <div className="bg-white border border-slate-200 rounded-xl overflow-hidden">
+              <div className="card overflow-hidden">
                 {dataLoading ? (
                   <div className="p-6 space-y-3">
                     <div className="h-10 bg-slate-100 rounded animate-pulse" />
@@ -811,7 +811,7 @@ export function AdminPage() {
               </div>
 
               {selectedLead && (
-                <div className="bg-white border border-slate-200 rounded-xl p-6 space-y-3">
+                <div className="card p-6 space-y-3">
                   <div className="flex items-center justify-between">
                     <h2 className="text-base font-bold text-[#0B1F3A]">
                       Lead Details — {selectedLead.company}
@@ -849,7 +849,7 @@ export function AdminPage() {
           {/* TAB 2: LIVE CHAT INBOX */}
           {activeTab === 'chat' && (
             <div className="space-y-6">
-              <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 bg-white border border-slate-200 rounded-xl overflow-hidden min-h-[520px]">
+              <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 card overflow-hidden min-h-[520px]">
                 {/* Conversations List */}
                 <div className="lg:col-span-5 border-b lg:border-b-0 lg:border-r border-slate-200 divide-y divide-slate-200 overflow-y-auto max-h-[560px]">
                   {conversations.length === 0 ? (
@@ -981,7 +981,7 @@ export function AdminPage() {
                         <button
                           type="submit"
                           disabled={sendingReply || !adminReply.trim()}
-                          className="inline-flex items-center gap-1.5 px-4 py-2 text-sm font-semibold text-white bg-[#0B1F3A] hover:bg-[#132F54] disabled:opacity-50 rounded-lg min-h-[40px]"
+                          className="inline-flex items-center gap-1.5 px-4 py-2 text-sm font-semibold text-white btn-primary disabled:opacity-50 rounded-lg min-h-[40px]"
                         >
                           <Send className="h-3.5 w-3.5" aria-hidden="true" />
                           Reply
@@ -994,7 +994,7 @@ export function AdminPage() {
 
               {/* Deletion Requests */}
               {deletionRequests.length > 0 && (
-                <div className="bg-white border border-slate-200 rounded-xl p-5 space-y-3">
+                <div className="card p-5 space-y-3">
                   <h2 className="text-sm font-bold text-[#0B1F3A]">
                     Chat Data Deletion Requests ({deletionRequests.length})
                   </h2>
@@ -1032,7 +1032,7 @@ export function AdminPage() {
 
           {/* TAB 3: MEETING REQUESTS */}
           {activeTab === 'meetings' && (
-            <div className="bg-white border border-slate-200 rounded-xl overflow-hidden">
+            <div className="card overflow-hidden">
               {meetings.length === 0 ? (
                 <div className="p-10 text-center text-sm text-slate-500">
                   No meeting requests submitted from live chat yet.
@@ -1094,7 +1094,7 @@ export function AdminPage() {
 
           {/* TAB 4: VISITOR ACTIVITY */}
           {activeTab === 'activity' && (
-            <div className="bg-white border border-slate-200 rounded-xl overflow-hidden">
+            <div className="card overflow-hidden">
               {events.length === 0 ? (
                 <div className="p-10 text-center text-sm text-slate-500">
                   No consented visitor events recorded yet.

@@ -13,10 +13,10 @@ export const CURRENCIES: Record<CurrencyCode, CurrencyConfig> = {
 };
 
 export const SITE_IMAGES = {
-  heroStudio: '/src/assets/images/hero_accounting_firm_1794705727048.jpg',
-  kathmanduOffice: '/src/assets/images/about_kathmandu_office_1794705726471.jpg',
-  teamLeadOne: '/src/assets/images/team_acca_lead_1794705727047.jpg',
-  teamLeadTwo: '/src/assets/images/team_bookkeeping_director_1794705727341.jpg',
+  heroStudio: '/images/hero.webp',
+  kathmanduOffice: '/images/office.webp',
+  teamLeadOne: '/images/team-lead-1.webp',
+  teamLeadTwo: '/images/team-lead-2.webp',
 };
 
 export interface ServiceDetail {
@@ -295,7 +295,7 @@ export const FAQ_ITEMS = [
     category: 'Credentials & Quality',
     question: 'Who prepares and reviews our accounts?',
     answer:
-      'Routine bookkeeping and data entry are executed by trained accounting specialists in Kathmandu, and every monthly close and accounting workpaper is reviewed under ACCA-qualified oversight before delivery. [Insert your exact team count and ACCA membership verification details here.]',
+      'Routine bookkeeping and data entry are executed by trained accounting specialists in Kathmandu, and every monthly close and accounting workpaper is reviewed under ACCA-qualified oversight before delivery.',
   },
   {
     category: 'Security & GDPR',

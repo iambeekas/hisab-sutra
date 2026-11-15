@@ -1,19 +1,20 @@
-import { useEffect } from 'react';
+import { lazy, Suspense, useEffect } from 'react';
 import { BrowserRouter, Link, Route, Routes, useLocation } from 'react-router-dom';
-import { ChatWidget } from './components/ChatWidget';
 import { CookieBanner } from './components/CookieBanner';
 import { Footer } from './components/Footer';
 import { Header } from './components/Header';
 import { trackEvent } from './lib/analytics';
 import { captureInitialAttribution } from './lib/utm';
 import { AboutPage } from './pages/AboutPage';
-import { AdminPage } from './pages/AdminPage';
 import { ContactPage } from './pages/ContactPage';
 import { FaqPage } from './pages/FaqPage';
 import { HomePage } from './pages/HomePage';
 import { CookiesPage, PrivacyPage, TermsPage } from './pages/LegalPages';
 import { PricingPage } from './pages/PricingPage';
 import { ServicesPage } from './pages/ServicesPage';
+
+const ChatWidget = lazy(() => import('./components/ChatWidget').then((m) => ({ default: m.ChatWidget })));
+const AdminPage = lazy(() => import('./pages/AdminPage').then((m) => ({ default: m.AdminPage })));
 
 function AnalyticsTracker() {
   const location = useLocation();
@@ -37,6 +38,17 @@ function AnalyticsTracker() {
 }
 
 function NotFoundPage() {
+  useEffect(() => {
+    document.title = 'Page Not Found | Hisab Sutra';
+    const meta = document.createElement('meta');
+    meta.name = 'robots';
+    meta.content = 'noindex';
+    document.head.appendChild(meta);
+    return () => {
+      meta.remove();
+    };
+  }, []);
+
   return (
     <section className="py-24 bg-slate-50 text-center px-4">
       <div className="max-w-md mx-auto space-y-4">
@@ -47,7 +59,7 @@ function NotFoundPage() {
         </p>
         <Link
           to="/"
-          className="inline-flex items-center justify-center px-5 py-2.5 text-sm font-semibold text-white bg-[#0B1F3A] hover:bg-[#132F54] rounded-lg min-h-[44px]"
+          className="inline-flex items-center justify-center px-5 py-2.5 text-sm font-semibold text-white btn-primary rounded-lg min-h-[44px]"
         >
           Return Home
         </Link>
@@ -73,13 +85,22 @@ export default function App() {
             <Route path="/privacy" element={<PrivacyPage />} />
             <Route path="/terms" element={<TermsPage />} />
             <Route path="/cookies" element={<CookiesPage />} />
-            <Route path="/admin" element={<AdminPage />} />
+            <Route
+              path="/admin"
+              element={
+                <Suspense fallback={null}>
+                  <AdminPage />
+                </Suspense>
+              }
+            />
             <Route path="*" element={<NotFoundPage />} />
           </Routes>
         </main>
         <Footer />
         <CookieBanner />
-        <ChatWidget />
+        <Suspense fallback={null}>
+          <ChatWidget />
+        </Suspense>
       </div>
     </BrowserRouter>
   );
