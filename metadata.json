@@ -1,0 +1,6 @@
+{
+  "name": "Hisab Sutra",
+  "description": "Formula for Next Generational Books — ACCA-led accounting, bookkeeping, and data entry outsourcing from Nepal for UK, European, and Gulf businesses.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

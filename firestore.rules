@@ -1,0 +1,322 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    // Global default-deny safety net
+    match /{document=**} {
+      allow read, write: if false;
+    }
+
+    function isValidId(id) {
+      return id is string && id.size() >= 1 && id.size() <= 128 && id.matches('^[a-zA-Z0-9_\\-]+$');
+    }
+
+    function incoming() {
+      return request.resource.data;
+    }
+
+    function existing() {
+      return resource.data;
+    }
+
+    function isSignedIn() {
+      return request.auth != null;
+    }
+
+    function isAdmin() {
+      return isSignedIn() && (
+        (request.auth.token.email_verified == true && request.auth.token.email == 'iambikashacca@gmail.com') ||
+        exists(/databases/$(database)/documents/admins/$(request.auth.uid))
+      );
+    }
+
+    function isValidEmail(val) {
+      return val is string && val.size() >= 5 && val.size() <= 160 && val.matches('^[^\\s@]+@[^\\s@]+\\.[^\\s@]+$');
+    }
+
+    function isValidLead(data) {
+      return data.keys().hasAll([
+          'name', 'workEmail', 'company', 'country',
+          'serviceNeeded', 'monthlyVolume', 'message',
+          'consentAccepted', 'status', 'utmSource',
+          'utmMedium', 'utmCampaign', 'referrer',
+          'landingPage', 'createdAt', 'updatedAt'
+        ])
+        && data.keys().hasOnly([
+          'name', 'workEmail', 'company', 'country',
+          'serviceNeeded', 'monthlyVolume', 'message',
+          'consentAccepted', 'status', 'utmSource',
+          'utmMedium', 'utmCampaign', 'referrer',
+          'landingPage', 'createdAt', 'updatedAt'
+        ])
+        && data.name is string && data.name.size() >= 2 && data.name.size() <= 120
+        && isValidEmail(data.workEmail)
+        && data.company is string && data.company.size() >= 1 && data.company.size() <= 160
+        && data.country in ['UK', 'Europe', 'Gulf', 'Other']
+        && data.serviceNeeded in ['Accounting', 'Bookkeeping', 'Data Entry', 'Full Finance Pod', 'Other']
+        && data.monthlyVolume in [
+          'Under 100 transactions',
+          '100 - 500 transactions',
+          '500 - 2,000 transactions',
+          '2,000+ transactions'
+        ]
+        && data.message is string && data.message.size() <= 2000
+        && data.consentAccepted == true
+        && data.status in ['new', 'contacted', 'won', 'lost']
+        && data.utmSource is string && data.utmSource.size() <= 120
+        && data.utmMedium is string && data.utmMedium.size() <= 120
+        && data.utmCampaign is string && data.utmCampaign.size() <= 120
+        && data.referrer is string && data.referrer.size() <= 500
+        && data.landingPage is string && data.landingPage.size() <= 300
+        && data.createdAt is timestamp
+        && data.updatedAt is timestamp;
+    }
+
+    function isValidEvent(data) {
+      return data.keys().hasAll([
+          'visitorId', 'eventType', 'page', 'label',
+          'utmSource', 'utmMedium', 'utmCampaign',
+          'referrer', 'createdAt'
+        ])
+        && data.keys().hasOnly([
+          'visitorId', 'eventType', 'page', 'label',
+          'utmSource', 'utmMedium', 'utmCampaign',
+          'referrer', 'createdAt'
+        ])
+        && data.visitorId is string && data.visitorId.size() >= 8 && data.visitorId.size() <= 64
+        && data.visitorId.matches('^[a-zA-Z0-9_\\-]+$')
+        && data.eventType in ['page_view', 'cta_click', 'form_start', 'form_submit', 'pricing_view']
+        && data.page is string && data.page.size() >= 1 && data.page.size() <= 200
+        && data.label is string && data.label.size() <= 200
+        && data.utmSource is string && data.utmSource.size() <= 120
+        && data.utmMedium is string && data.utmMedium.size() <= 120
+        && data.utmCampaign is string && data.utmCampaign.size() <= 120
+        && data.referrer is string && data.referrer.size() <= 500
+        && data.createdAt is timestamp;
+    }
+
+    function isValidConversation(data) {
+      return data.keys().hasAll([
+          'visitorUid', 'visitorName', 'visitorEmail', 'status',
+          'unreadByAdmin', 'unreadCountAdmin', 'lastMessagePreview',
+          'utmSource', 'utmMedium', 'utmCampaign', 'referrer',
+          'landingPage', 'deletionRequested', 'createdAt', 'updatedAt', 'lastMessageAt'
+        ])
+        && data.keys().hasOnly([
+          'visitorUid', 'visitorName', 'visitorEmail', 'status',
+          'unreadByAdmin', 'unreadCountAdmin', 'lastMessagePreview',
+          'utmSource', 'utmMedium', 'utmCampaign', 'referrer',
+          'landingPage', 'deletionRequested', 'createdAt', 'updatedAt', 'lastMessageAt'
+        ])
+        && isValidId(data.visitorUid)
+        && data.visitorName is string && data.visitorName.size() >= 2 && data.visitorName.size() <= 100
+        && isValidEmail(data.visitorEmail)
+        && data.status in ['open', 'closed']
+        && data.unreadByAdmin is bool
+        && data.unreadCountAdmin is number && data.unreadCountAdmin >= 0 && data.unreadCountAdmin <= 1000
+        && data.lastMessagePreview is string && data.lastMessagePreview.size() <= 200
+        && data.utmSource is string && data.utmSource.size() <= 120
+        && data.utmMedium is string && data.utmMedium.size() <= 120
+        && data.utmCampaign is string && data.utmCampaign.size() <= 120
+        && data.referrer is string && data.referrer.size() <= 500
+        && data.landingPage is string && data.landingPage.size() <= 300
+        && data.deletionRequested is bool
+        && data.createdAt is timestamp
+        && data.updatedAt is timestamp
+        && data.lastMessageAt is timestamp;
+    }
+
+    function isValidMessage(data, conversationId) {
+      return data.keys().hasAll([
+          'conversationId', 'visitorUid', 'senderUid',
+          'senderRole', 'senderName', 'text', 'createdAt'
+        ])
+        && data.keys().hasOnly([
+          'conversationId', 'visitorUid', 'senderUid',
+          'senderRole', 'senderName', 'text', 'createdAt'
+        ])
+        && data.conversationId == conversationId
+        && isValidId(data.visitorUid)
+        && isValidId(data.senderUid)
+        && data.senderRole in ['visitor', 'admin']
+        && data.senderName is string && data.senderName.size() >= 1 && data.senderName.size() <= 100
+        && data.text is string && data.text.size() >= 1 && data.text.size() <= 1500
+        && data.createdAt is timestamp;
+    }
+
+    function isValidMeetingRequest(data) {
+      return data.keys().hasAll([
+          'visitorUid', 'conversationId', 'visitorName', 'visitorEmail',
+          'preferredDate', 'preferredTime', 'timezone', 'topic',
+          'status', 'utmSource', 'utmMedium', 'utmCampaign',
+          'createdAt', 'updatedAt'
+        ])
+        && data.keys().hasOnly([
+          'visitorUid', 'conversationId', 'visitorName', 'visitorEmail',
+          'preferredDate', 'preferredTime', 'timezone', 'topic',
+          'status', 'utmSource', 'utmMedium', 'utmCampaign',
+          'createdAt', 'updatedAt'
+        ])
+        && isValidId(data.visitorUid)
+        && data.conversationId is string && data.conversationId.size() <= 128
+        && data.visitorName is string && data.visitorName.size() >= 2 && data.visitorName.size() <= 100
+        && isValidEmail(data.visitorEmail)
+        && data.preferredDate is string && data.preferredDate.size() >= 4 && data.preferredDate.size() <= 40
+        && data.preferredTime is string && data.preferredTime.size() >= 2 && data.preferredTime.size() <= 40
+        && data.timezone is string && data.timezone.size() >= 2 && data.timezone.size() <= 80
+        && data.topic is string && data.topic.size() <= 500
+        && data.status in ['pending', 'confirmed', 'completed', 'cancelled']
+        && data.utmSource is string && data.utmSource.size() <= 120
+        && data.utmMedium is string && data.utmMedium.size() <= 120
+        && data.utmCampaign is string && data.utmCampaign.size() <= 120
+        && data.createdAt is timestamp
+        && data.updatedAt is timestamp;
+    }
+
+    function isValidDeletionRequest(data) {
+      return data.keys().hasAll(['email', 'visitorUid', 'reason', 'status', 'createdAt'])
+        && data.keys().hasOnly(['email', 'visitorUid', 'reason', 'status', 'createdAt'])
+        && isValidEmail(data.email)
+        && data.visitorUid is string && data.visitorUid.size() <= 128
+        && data.reason is string && data.reason.size() <= 500
+        && data.status in ['pending', 'completed']
+        && data.createdAt is timestamp;
+    }
+
+    match /leads/{leadId} {
+      allow create: if isValidId(leadId)
+        && isValidLead(incoming())
+        && incoming().status == 'new'
+        && incoming().createdAt == request.time
+        && incoming().updatedAt == request.time;
+      allow get: if isAdmin() && isValidId(leadId);
+      allow list: if isAdmin();
+      allow update: if isAdmin()
+        && isValidId(leadId)
+        && isValidLead(incoming())
+        && incoming().createdAt == existing().createdAt
+        && incoming().updatedAt == request.time
+        && incoming().diff(existing()).affectedKeys().hasOnly(['status', 'updatedAt']);
+      allow delete: if isAdmin() && isValidId(leadId);
+    }
+
+    match /events/{eventId} {
+      allow create: if isValidId(eventId)
+        && isValidEvent(incoming())
+        && incoming().createdAt == request.time;
+      allow get: if isAdmin() && isValidId(eventId);
+      allow list: if isAdmin();
+      allow update, delete: if false;
+    }
+
+    match /conversations/{conversationId} {
+      allow get: if isValidId(conversationId) && (
+        isAdmin() || (isSignedIn() && existing().visitorUid == request.auth.uid)
+      );
+      allow list: if isAdmin() || (isSignedIn() && resource.data.visitorUid == request.auth.uid);
+      allow create: if isSignedIn()
+        && isValidId(conversationId)
+        && isValidConversation(incoming())
+        && incoming().visitorUid == request.auth.uid
+        && incoming().status == 'open'
+        && incoming().deletionRequested == false
+        && incoming().createdAt == request.time
+        && incoming().updatedAt == request.time
+        && incoming().lastMessageAt == request.time;
+      allow update: if isSignedIn()
+        && isValidId(conversationId)
+        && isValidConversation(incoming())
+        && incoming().visitorUid == existing().visitorUid
+        && incoming().createdAt == existing().createdAt
+        && incoming().updatedAt == request.time
+        && (
+          isAdmin() || (
+            existing().visitorUid == request.auth.uid && (
+              (
+                incoming().diff(existing()).affectedKeys().hasOnly([
+                  'lastMessagePreview', 'lastMessageAt', 'updatedAt', 'unreadByAdmin', 'unreadCountAdmin'
+                ]) &&
+                incoming().lastMessageAt == request.time
+              ) ||
+              (
+                incoming().diff(existing()).affectedKeys().hasOnly([
+                  'deletionRequested', 'updatedAt'
+                ]) &&
+                incoming().deletionRequested == true
+              )
+            )
+          )
+        );
+      allow delete: if isValidId(conversationId) && (
+        isAdmin() || (isSignedIn() && existing().visitorUid == request.auth.uid)
+      );
+
+      match /messages/{messageId} {
+        allow get: if isValidId(conversationId) && isValidId(messageId) && (
+          isAdmin() || (isSignedIn() && existing().visitorUid == request.auth.uid)
+        );
+        allow list: if isAdmin() || (isSignedIn() && resource.data.visitorUid == request.auth.uid);
+        allow create: if isSignedIn()
+          && isValidId(conversationId)
+          && isValidId(messageId)
+          && isValidMessage(incoming(), conversationId)
+          && incoming().senderUid == request.auth.uid
+          && incoming().createdAt == request.time
+          && exists(/databases/$(database)/documents/conversations/$(conversationId))
+          && incoming().visitorUid == get(/databases/$(database)/documents/conversations/$(conversationId)).data.visitorUid
+          && (
+            (isAdmin() && incoming().senderRole == 'admin') ||
+            (incoming().senderRole == 'visitor' && incoming().visitorUid == request.auth.uid)
+          );
+        allow update: if false;
+        allow delete: if isValidId(conversationId) && isValidId(messageId) && (
+          isAdmin() || (isSignedIn() && existing().visitorUid == request.auth.uid)
+        );
+      }
+    }
+
+    match /meetingRequests/{requestId} {
+      allow get: if isValidId(requestId) && (
+        isAdmin() || (isSignedIn() && existing().visitorUid == request.auth.uid)
+      );
+      allow list: if isAdmin() || (isSignedIn() && resource.data.visitorUid == request.auth.uid);
+      allow create: if isSignedIn()
+        && isValidId(requestId)
+        && isValidMeetingRequest(incoming())
+        && incoming().visitorUid == request.auth.uid
+        && incoming().status == 'pending'
+        && incoming().createdAt == request.time
+        && incoming().updatedAt == request.time;
+      allow update: if isAdmin()
+        && isValidId(requestId)
+        && isValidMeetingRequest(incoming())
+        && incoming().visitorUid == existing().visitorUid
+        && incoming().createdAt == existing().createdAt
+        && incoming().updatedAt == request.time
+        && incoming().diff(existing()).affectedKeys().hasOnly(['status', 'updatedAt']);
+      allow delete: if isValidId(requestId) && (
+        isAdmin() || (isSignedIn() && existing().visitorUid == request.auth.uid)
+      );
+    }
+
+    match /deletionRequests/{requestId} {
+      allow create: if isValidId(requestId)
+        && isValidDeletionRequest(incoming())
+        && incoming().status == 'pending'
+        && incoming().createdAt == request.time;
+      allow get: if isAdmin() && isValidId(requestId);
+      allow list: if isAdmin();
+      allow update: if isAdmin()
+        && isValidId(requestId)
+        && isValidDeletionRequest(incoming())
+        && incoming().createdAt == existing().createdAt
+        && incoming().diff(existing()).affectedKeys().hasOnly(['status']);
+      allow delete: if isAdmin() && isValidId(requestId);
+    }
+
+    match /admins/{adminId} {
+      allow get: if isSignedIn() && isValidId(adminId) && (request.auth.uid == adminId || isAdmin());
+      allow list: if isAdmin();
+      allow write: if false;
+    }
+  }
+}

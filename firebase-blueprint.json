@@ -1,0 +1,289 @@
+{
+  "entities": {
+    "Lead": {
+      "title": "Lead",
+      "description": "Quote and consultation request submitted by a prospective client.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "minLength": 2,
+          "maxLength": 120
+        },
+        "workEmail": {
+          "type": "string",
+          "format": "email",
+          "minLength": 5,
+          "maxLength": 160,
+          "pattern": "^[^\\s@]+@[^\\s@]+\\.[^\\s@]+$"
+        },
+        "company": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 160
+        },
+        "country": {
+          "type": "string",
+          "enum": ["UK", "Europe", "Gulf", "Other"]
+        },
+        "serviceNeeded": {
+          "type": "string",
+          "enum": ["Accounting", "Bookkeeping", "Data Entry", "Full Finance Pod", "Other"]
+        },
+        "monthlyVolume": {
+          "type": "string",
+          "enum": [
+            "Under 100 transactions",
+            "100 - 500 transactions",
+            "500 - 2,000 transactions",
+            "2,000+ transactions"
+          ]
+        },
+        "message": {
+          "type": "string",
+          "maxLength": 2000
+        },
+        "consentAccepted": {
+          "type": "boolean"
+        },
+        "status": {
+          "type": "string",
+          "enum": ["new", "contacted", "won", "lost"]
+        },
+        "utmSource": { "type": "string", "maxLength": 120 },
+        "utmMedium": { "type": "string", "maxLength": 120 },
+        "utmCampaign": { "type": "string", "maxLength": 120 },
+        "referrer": { "type": "string", "maxLength": 500 },
+        "landingPage": { "type": "string", "maxLength": 300 },
+        "createdAt": { "type": "string", "format": "date-time" },
+        "updatedAt": { "type": "string", "format": "date-time" }
+      },
+      "required": [
+        "name",
+        "workEmail",
+        "company",
+        "country",
+        "serviceNeeded",
+        "monthlyVolume",
+        "message",
+        "consentAccepted",
+        "status",
+        "utmSource",
+        "utmMedium",
+        "utmCampaign",
+        "referrer",
+        "landingPage",
+        "createdAt",
+        "updatedAt"
+      ]
+    },
+    "AnalyticsEvent": {
+      "title": "AnalyticsEvent",
+      "description": "Consent-gated behavioral analytics event (limited set for Spark free quota).",
+      "type": "object",
+      "properties": {
+        "visitorId": {
+          "type": "string",
+          "minLength": 8,
+          "maxLength": 64,
+          "pattern": "^[a-zA-Z0-9_\\-]+$"
+        },
+        "eventType": {
+          "type": "string",
+          "enum": ["page_view", "cta_click", "form_start", "form_submit", "pricing_view"]
+        },
+        "page": { "type": "string", "minLength": 1, "maxLength": 200 },
+        "label": { "type": "string", "maxLength": 200 },
+        "utmSource": { "type": "string", "maxLength": 120 },
+        "utmMedium": { "type": "string", "maxLength": 120 },
+        "utmCampaign": { "type": "string", "maxLength": 120 },
+        "referrer": { "type": "string", "maxLength": 500 },
+        "createdAt": { "type": "string", "format": "date-time" }
+      },
+      "required": [
+        "visitorId",
+        "eventType",
+        "page",
+        "label",
+        "utmSource",
+        "utmMedium",
+        "utmCampaign",
+        "referrer",
+        "createdAt"
+      ]
+    },
+    "Conversation": {
+      "title": "Conversation",
+      "description": "Live chat session owned by an anonymously authenticated visitor.",
+      "type": "object",
+      "properties": {
+        "visitorUid": { "type": "string", "minLength": 1, "maxLength": 128 },
+        "visitorName": { "type": "string", "minLength": 2, "maxLength": 100 },
+        "visitorEmail": {
+          "type": "string",
+          "format": "email",
+          "minLength": 5,
+          "maxLength": 160,
+          "pattern": "^[^\\s@]+@[^\\s@]+\\.[^\\s@]+$"
+        },
+        "status": { "type": "string", "enum": ["open", "closed"] },
+        "unreadByAdmin": { "type": "boolean" },
+        "unreadCountAdmin": { "type": "number" },
+        "lastMessagePreview": { "type": "string", "maxLength": 200 },
+        "utmSource": { "type": "string", "maxLength": 120 },
+        "utmMedium": { "type": "string", "maxLength": 120 },
+        "utmCampaign": { "type": "string", "maxLength": 120 },
+        "referrer": { "type": "string", "maxLength": 500 },
+        "landingPage": { "type": "string", "maxLength": 300 },
+        "deletionRequested": { "type": "boolean" },
+        "createdAt": { "type": "string", "format": "date-time" },
+        "updatedAt": { "type": "string", "format": "date-time" },
+        "lastMessageAt": { "type": "string", "format": "date-time" }
+      },
+      "required": [
+        "visitorUid",
+        "visitorName",
+        "visitorEmail",
+        "status",
+        "unreadByAdmin",
+        "unreadCountAdmin",
+        "lastMessagePreview",
+        "utmSource",
+        "utmMedium",
+        "utmCampaign",
+        "referrer",
+        "landingPage",
+        "deletionRequested",
+        "createdAt",
+        "updatedAt",
+        "lastMessageAt"
+      ]
+    },
+    "ChatMessage": {
+      "title": "ChatMessage",
+      "description": "Individual message inside a visitor conversation.",
+      "type": "object",
+      "properties": {
+        "conversationId": { "type": "string", "minLength": 1, "maxLength": 128 },
+        "visitorUid": { "type": "string", "minLength": 1, "maxLength": 128 },
+        "senderUid": { "type": "string", "minLength": 1, "maxLength": 128 },
+        "senderRole": { "type": "string", "enum": ["visitor", "admin"] },
+        "senderName": { "type": "string", "minLength": 1, "maxLength": 100 },
+        "text": { "type": "string", "minLength": 1, "maxLength": 1500 },
+        "createdAt": { "type": "string", "format": "date-time" }
+      },
+      "required": [
+        "conversationId",
+        "visitorUid",
+        "senderUid",
+        "senderRole",
+        "senderName",
+        "text",
+        "createdAt"
+      ]
+    },
+    "MeetingRequest": {
+      "title": "MeetingRequest",
+      "description": "Meeting schedule request submitted from inside the live chat widget.",
+      "type": "object",
+      "properties": {
+        "visitorUid": { "type": "string", "minLength": 1, "maxLength": 128 },
+        "conversationId": { "type": "string", "maxLength": 128 },
+        "visitorName": { "type": "string", "minLength": 2, "maxLength": 100 },
+        "visitorEmail": {
+          "type": "string",
+          "format": "email",
+          "minLength": 5,
+          "maxLength": 160,
+          "pattern": "^[^\\s@]+@[^\\s@]+\\.[^\\s@]+$"
+        },
+        "preferredDate": { "type": "string", "minLength": 4, "maxLength": 40 },
+        "preferredTime": { "type": "string", "minLength": 2, "maxLength": 40 },
+        "timezone": { "type": "string", "minLength": 2, "maxLength": 80 },
+        "topic": { "type": "string", "maxLength": 500 },
+        "status": { "type": "string", "enum": ["pending", "confirmed", "completed", "cancelled"] },
+        "utmSource": { "type": "string", "maxLength": 120 },
+        "utmMedium": { "type": "string", "maxLength": 120 },
+        "utmCampaign": { "type": "string", "maxLength": 120 },
+        "createdAt": { "type": "string", "format": "date-time" },
+        "updatedAt": { "type": "string", "format": "date-time" }
+      },
+      "required": [
+        "visitorUid",
+        "conversationId",
+        "visitorName",
+        "visitorEmail",
+        "preferredDate",
+        "preferredTime",
+        "timezone",
+        "topic",
+        "status",
+        "utmSource",
+        "utmMedium",
+        "utmCampaign",
+        "createdAt",
+        "updatedAt"
+      ]
+    },
+    "DeletionRequest": {
+      "title": "DeletionRequest",
+      "description": "Visitor GDPR request to erase chat history.",
+      "type": "object",
+      "properties": {
+        "email": {
+          "type": "string",
+          "format": "email",
+          "minLength": 5,
+          "maxLength": 160,
+          "pattern": "^[^\\s@]+@[^\\s@]+\\.[^\\s@]+$"
+        },
+        "visitorUid": { "type": "string", "maxLength": 128 },
+        "reason": { "type": "string", "maxLength": 500 },
+        "status": { "type": "string", "enum": ["pending", "completed"] },
+        "createdAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["email", "visitorUid", "reason", "status", "createdAt"]
+    },
+    "AdminUser": {
+      "title": "AdminUser",
+      "description": "Authorized administrator registry record.",
+      "type": "object",
+      "properties": {
+        "email": { "type": "string", "format": "email", "maxLength": 160 },
+        "role": { "type": "string", "enum": ["admin"] },
+        "createdAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["email", "role", "createdAt"]
+    }
+  },
+  "firestore": {
+    "/leads/{leadId}": {
+      "schema": { "$ref": "#/entities/Lead" },
+      "description": "Public quote submissions; read/update/delete restricted to admins."
+    },
+    "/events/{eventId}": {
+      "schema": { "$ref": "#/entities/AnalyticsEvent" },
+      "description": "Consent-gated visitor activity events; read restricted to admins."
+    },
+    "/conversations/{conversationId}": {
+      "schema": { "$ref": "#/entities/Conversation" },
+      "description": "Visitor live chat sessions; isolated to owning visitorUid and admins."
+    },
+    "/conversations/{conversationId}/messages/{messageId}": {
+      "schema": { "$ref": "#/entities/ChatMessage" },
+      "description": "Messages belonging to a chat conversation; isolated to owning visitorUid and admins."
+    },
+    "/meetingRequests/{requestId}": {
+      "schema": { "$ref": "#/entities/MeetingRequest" },
+      "description": "Meeting requests submitted from live chat."
+    },
+    "/deletionRequests/{requestId}": {
+      "schema": { "$ref": "#/entities/DeletionRequest" },
+      "description": "GDPR chat data deletion requests."
+    },
+    "/admins/{adminId}": {
+      "schema": { "$ref": "#/entities/AdminUser" },
+      "description": "Admin role lookup records managed out-of-band."
+    }
+  }
+}
