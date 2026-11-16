@@ -25,17 +25,17 @@ function LegalLayout({
   children: ReactNode;
 }) {
   return (
-    <section className="py-14 sm:py-16 bg-slate-50">
+    <section className="py-14 sm:py-16 bg-paper-50">
       <div className="max-w-[820px] mx-auto px-4 sm:px-6">
         <div className="card p-6 sm:p-10 space-y-6">
-          <header className="border-b border-slate-200 pb-6 space-y-2">
-            <p className="text-xs font-semibold text-teal-800">
+          <header className="border-b border-line-200 pb-6 space-y-2">
+            <p className="text-xs font-semibold text-accent-800">
               [Legal Review Draft — Verify with Qualified Counsel]
             </p>
-            <h1 className="text-2xl sm:text-3xl font-bold text-[#0B1F3A]">{title}</h1>
-            <p className="text-sm text-slate-600">{subtitle}</p>
+            <h1 className="text-2xl sm:text-3xl font-bold text-navy-900">{title}</h1>
+            <p className="text-sm text-ink-600">{subtitle}</p>
           </header>
-          <div className="space-y-6 text-sm text-slate-700 leading-relaxed">{children}</div>
+          <div className="space-y-6 text-sm text-ink-700 leading-relaxed">{children}</div>
         </div>
       </div>
     </section>
@@ -156,7 +156,7 @@ export function PrivacyPage() {
         subtitle="Last updated: [Date Placeholder] · Data Controller: Hisab Sutra ([Registered Legal Entity Name Placeholder])"
       >
         <section className="space-y-2">
-          <h2 className="text-base font-bold text-[#0B1F3A]">1. Who We Are</h2>
+          <h2 className="text-base font-bold text-navy-900">1. Who We Are</h2>
           <p>
             Hisab Sutra (&ldquo;we&rdquo;, &ldquo;our&rdquo;, &ldquo;us&rdquo;) is an accounting,
             bookkeeping, and financial data entry outsourcing firm located in [Kathmandu, Nepal
@@ -165,7 +165,7 @@ export function PrivacyPage() {
         </section>
 
         <section className="space-y-2">
-          <h2 className="text-base font-bold text-[#0B1F3A]">2. Personal Data We Collect</h2>
+          <h2 className="text-base font-bold text-navy-900">2. Personal Data We Collect</h2>
           <p>
             When you submit our quote form, start a live chat, or request a meeting, we collect
             your name, email address, inquiry details, and first-party session attribution
@@ -175,7 +175,7 @@ export function PrivacyPage() {
         </section>
 
         <section className="space-y-2">
-          <h2 className="text-base font-bold text-[#0B1F3A]">
+          <h2 className="text-base font-bold text-navy-900">
             3. Lawful Basis &amp; EU/UK Database Residency
           </h2>
           <p>
@@ -188,11 +188,11 @@ export function PrivacyPage() {
         </section>
 
         <section className="space-y-2">
-          <h2 className="text-base font-bold text-[#0B1F3A]">4. Data Retention Schedule</h2>
+          <h2 className="text-base font-bold text-navy-900">4. Data Retention Schedule</h2>
           <p>
             We retain personal data only as long as necessary for the purpose collected:
           </p>
-          <ul className="list-disc pl-5 space-y-1">
+          <ul className="list-disc ps-5 space-y-1">
             <li>
               <strong>Live Chat Conversations &amp; Messages:</strong> Retained for [e.g. 12 months
               Placeholder] after the conversation closes, or deleted immediately upon your request.
@@ -208,17 +208,17 @@ export function PrivacyPage() {
           </ul>
         </section>
 
-        <section className="space-y-4 pt-4 border-t border-slate-200" id="delete-chat-data">
-          <h2 className="text-base font-bold text-[#0B1F3A]">5. Delete My Chat Data</h2>
+        <section className="space-y-4 pt-4 border-t border-line-200" id="delete-chat-data">
+          <h2 className="text-base font-bold text-navy-900">5. Delete My Chat Data</h2>
           <p>
             You may erase your active browser chat history immediately below or submit a formal
             deletion request for any past chat associated with your email address.
           </p>
 
           {activeConvCount > 0 && (
-            <div className="p-4 rounded-lg bg-slate-50 border border-slate-200 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
-              <div className="text-xs text-slate-700">
-                <p className="font-semibold text-[#0B1F3A]">
+            <div className="p-4 rounded-lg bg-paper-50 border border-line-200 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+              <div className="text-xs text-ink-700">
+                <p className="font-semibold text-navy-900">
                   Active chat session found in this browser ({activeConvCount})
                 </p>
                 <p>Click to permanently erase your conversation and messages now.</p>
@@ -236,15 +236,15 @@ export function PrivacyPage() {
           )}
 
           {deletedActiveDone && (
-            <div className="p-3 rounded-lg bg-teal-50 border border-teal-200 text-xs text-teal-900 flex items-center gap-2">
-              <CheckCircle2 className="h-4 w-4 text-teal-700 shrink-0" aria-hidden="true" />
+            <div className="p-3 rounded-lg bg-accent-50 border border-accent-200 text-xs text-accent-900 flex items-center gap-2">
+              <CheckCircle2 className="h-4 w-4 text-accent-700 shrink-0" aria-hidden="true" />
               <span>Your active browser chat data has been permanently deleted.</span>
             </div>
           )}
 
           {reqDone ? (
-            <div className="p-4 rounded-lg bg-teal-50 border border-teal-200 text-xs text-teal-900 flex items-center gap-2">
-              <CheckCircle2 className="h-4 w-4 text-teal-700 shrink-0" aria-hidden="true" />
+            <div className="p-4 rounded-lg bg-accent-50 border border-accent-200 text-xs text-accent-900 flex items-center gap-2">
+              <CheckCircle2 className="h-4 w-4 text-accent-700 shrink-0" aria-hidden="true" />
               <span>
                 Your chat data deletion request has been logged. Our team will verify and purge any
                 matching records within [e.g. 72 hours / 30 days Placeholder].
@@ -253,12 +253,12 @@ export function PrivacyPage() {
           ) : (
             <form
               onSubmit={handleSubmitDeletionRequest}
-              className="p-4 rounded-lg border border-slate-200 bg-slate-50/70 space-y-3"
+              className="p-4 rounded-lg border border-line-200 bg-paper-50/70 space-y-3"
             >
-              <p className="text-xs font-semibold text-[#0B1F3A]">
+              <p className="text-xs font-semibold text-navy-900">
                 Request Chat Data Deletion by Email
               </p>
-              {reqError && <p className="text-xs text-red-700">{reqError}</p>}
+              {reqError && <p className="text-xs text-danger-fg">{reqError}</p>}
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                 <input
                   type="email"
@@ -267,7 +267,7 @@ export function PrivacyPage() {
                   value={reqEmail}
                   onChange={(e) => setReqEmail(e.target.value)}
                   placeholder="Email used in live chat *"
-                  className="px-3 py-2 text-xs bg-white border border-slate-300 rounded-lg focus:outline-none focus:border-teal-700"
+                  className="px-3 py-2 text-xs bg-surface border border-line-300 rounded-lg focus:outline-none focus:border-accent-700"
                 />
                 <input
                   type="text"
@@ -275,7 +275,7 @@ export function PrivacyPage() {
                   value={reqReason}
                   onChange={(e) => setReqReason(e.target.value)}
                   placeholder="Optional note (e.g. approximate date)"
-                  className="px-3 py-2 text-xs bg-white border border-slate-300 rounded-lg focus:outline-none focus:border-teal-700"
+                  className="px-3 py-2 text-xs bg-surface border border-line-300 rounded-lg focus:outline-none focus:border-accent-700"
                 />
               </div>
               <button
@@ -306,7 +306,7 @@ export function TermsPage() {
         subtitle="Last updated: [Date Placeholder] · Hisab Sutra ([Registered Legal Entity Name Placeholder])"
       >
         <section className="space-y-2">
-          <h2 className="text-base font-bold text-[#0B1F3A]">1. Website Scope</h2>
+          <h2 className="text-base font-bold text-navy-900">1. Website Scope</h2>
           <p>
             This website provides general information regarding accounting, bookkeeping, and data
             entry outsourcing services offered by Hisab Sutra. Nothing on this website constitutes
@@ -316,7 +316,7 @@ export function TermsPage() {
         </section>
 
         <section className="space-y-2">
-          <h2 className="text-base font-bold text-[#0B1F3A]">2. Indicative Pricing &amp; Quotes</h2>
+          <h2 className="text-base font-bold text-navy-900">2. Indicative Pricing &amp; Quotes</h2>
           <p>
             Package rates displayed in GBP, EUR, or USD are indicative starting tiers. All formal
             engagements require a signed Master Services Agreement, Engagement Letter, and Mutual
@@ -325,7 +325,7 @@ export function TermsPage() {
         </section>
 
         <section className="space-y-2">
-          <h2 className="text-base font-bold text-[#0B1F3A]">3. Confidentiality &amp; Access</h2>
+          <h2 className="text-base font-bold text-navy-900">3. Confidentiality &amp; Access</h2>
           <p>
             Clients retain full ownership of their accounting records and cloud ledger
             subscriptions. Hisab Sutra personnel operate strictly within role-based permissions
@@ -334,7 +334,7 @@ export function TermsPage() {
         </section>
 
         <section className="space-y-2">
-          <h2 className="text-base font-bold text-[#0B1F3A]">4. Governing Law</h2>
+          <h2 className="text-base font-bold text-navy-900">4. Governing Law</h2>
           <p>
             [Insert Governing Law and Dispute Resolution Jurisdiction Clause as advised by your
             commercial lawyer.]
@@ -358,7 +358,7 @@ export function CookiesPage() {
         subtitle="Last updated: [Date Placeholder] · Consent-First Tracking Architecture"
       >
         <section className="space-y-2">
-          <h2 className="text-base font-bold text-[#0B1F3A]">1. How We Use Storage &amp; Cookies</h2>
+          <h2 className="text-base font-bold text-navy-900">1. How We Use Storage &amp; Cookies</h2>
           <p>
             Hisab Sutra minimizes tracking technologies. Strictly necessary browser storage is used
             to remember your cookie consent choice and preserve first-party campaign attribution
@@ -367,7 +367,7 @@ export function CookiesPage() {
         </section>
 
         <section className="space-y-2">
-          <h2 className="text-base font-bold text-[#0B1F3A]">
+          <h2 className="text-base font-bold text-navy-900">
             2. Consent-Gated Analytics Events
           </h2>
           <p>
@@ -378,7 +378,7 @@ export function CookiesPage() {
         </section>
 
         <section className="space-y-3">
-          <h2 className="text-base font-bold text-[#0B1F3A]">3. Manage Your Preferences</h2>
+          <h2 className="text-base font-bold text-navy-900">3. Manage Your Preferences</h2>
           <p>You can update or withdraw your analytics consent at any time:</p>
           <button
             type="button"

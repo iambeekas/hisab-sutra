@@ -486,7 +486,7 @@ export function ChatWidget() {
   };
 
   return (
-    <div className="fixed bottom-4 right-4 z-40 lg:z-[55]">
+    <div className="fixed bottom-4 end-4 z-40 lg:z-[55]">
       {!isOpen && (
         <button
           type="button"
@@ -551,7 +551,7 @@ export function ChatWidget() {
           </header>
 
           {/* Mandatory Security Notice */}
-          <div className="px-3.5 py-2 bg-amber-50 border-b border-amber-200 text-[11px] text-amber-950 leading-snug shrink-0">
+          <div className="px-3.5 py-2 bg-warn-bg border-b border-warn-line text-[11px] text-warn-fg leading-snug shrink-0">
             Please do not share bank details, passwords or documents here. Send documents by email
             to <span className="font-semibold">[hello@hisabsutra.com]</span>.
           </div>
@@ -560,9 +560,9 @@ export function ChatWidget() {
           {chatError && (
             <div
               role="alert"
-              className="mx-3 mt-2 p-2.5 rounded-lg bg-red-50 border border-red-200 text-xs text-red-800 flex items-start gap-2 shrink-0"
+              className="mx-3 mt-2 p-2.5 rounded-lg bg-danger-bg border border-danger-line text-xs text-danger-fg flex items-start gap-2 shrink-0"
             >
-              <ShieldAlert className="h-4 w-4 text-red-600 shrink-0 mt-0.5" aria-hidden="true" />
+              <ShieldAlert className="h-4 w-4 text-danger-fg shrink-0 mt-0.5" aria-hidden="true" />
               <span>{chatError}</span>
             </div>
           )}
@@ -570,8 +570,8 @@ export function ChatWidget() {
           {/* VIEW: Delete Chat Confirmation */}
           {viewMode === 'deleteConfirm' && conversation && (
             <div className="flex-1 p-4 flex flex-col justify-center space-y-4">
-              <h3 className="text-base font-bold text-[#0B1F3A]">Delete Your Chat Data?</h3>
-              <p className="text-xs text-slate-600 leading-relaxed">
+              <h3 className="text-base font-bold text-navy-900">Delete Your Chat Data?</h3>
+              <p className="text-xs text-ink-600 leading-relaxed">
                 This will permanently remove your active conversation and all messages from our
                 database immediately.
               </p>
@@ -587,7 +587,7 @@ export function ChatWidget() {
                 <button
                   type="button"
                   onClick={() => setViewMode('chat')}
-                  className="px-4 py-2 text-xs font-medium text-slate-700 border border-slate-300 hover:bg-slate-50 rounded-lg min-h-[38px]"
+                  className="px-4 py-2 text-xs font-medium text-ink-700 border border-line-300 hover:bg-paper-50 rounded-lg min-h-[38px]"
                 >
                   Cancel
                 </button>
@@ -599,12 +599,12 @@ export function ChatWidget() {
           {viewMode === 'meeting' && (
             <div className="flex-1 overflow-y-auto p-4 space-y-4">
               {meetingSuccess ? (
-                <div className="p-4 rounded-lg bg-teal-50 border border-teal-200 space-y-3">
-                  <div className="flex items-center gap-2 text-teal-900 font-semibold text-sm">
-                    <CheckCircle2 className="h-4 w-4 text-teal-700" aria-hidden="true" />
+                <div className="p-4 rounded-lg bg-accent-50 border border-accent-200 space-y-3">
+                  <div className="flex items-center gap-2 text-accent-900 font-semibold text-sm">
+                    <CheckCircle2 className="h-4 w-4 text-accent-700" aria-hidden="true" />
                     <span>Meeting Request Sent</span>
                   </div>
-                  <p className="text-xs text-teal-900 leading-relaxed">
+                  <p className="text-xs text-accent-900 leading-relaxed">
                     We received your preferred slot ({meetingDate} at {meetingTime},{' '}
                     {meetingTimezone}) and sent a confirmation email.
                   </p>
@@ -619,8 +619,8 @@ export function ChatWidget() {
               ) : (
                 <form onSubmit={handleMeetingSubmit} className="space-y-3">
                   <div>
-                    <h3 className="text-sm font-bold text-[#0B1F3A]">Request a Call Slot</h3>
-                    <p className="text-xs text-slate-600 mt-0.5">
+                    <h3 className="text-sm font-bold text-navy-900">Request a Call Slot</h3>
+                    <p className="text-xs text-ink-600 mt-0.5">
                       Pick a preferred date and time—our team will send a calendar invite.
                     </p>
                   </div>
@@ -628,7 +628,7 @@ export function ChatWidget() {
                   {!conversation && (
                     <div className="grid grid-cols-1 gap-2.5">
                       <div>
-                        <label className="block text-[11px] font-semibold text-slate-700 mb-1">
+                        <label className="block text-[11px] font-semibold text-ink-700 mb-1">
                           Your Name *
                         </label>
                         <input
@@ -638,11 +638,11 @@ export function ChatWidget() {
                           value={visitorName}
                           onChange={(e) => setVisitorName(e.target.value)}
                           placeholder="Full name"
-                          className="w-full px-3 py-2 text-xs border border-slate-300 rounded-lg focus:outline-none focus:border-teal-700"
+                          className="w-full px-3 py-2 text-xs border border-line-300 rounded-lg focus:outline-none focus:border-accent-700"
                         />
                       </div>
                       <div>
-                        <label className="block text-[11px] font-semibold text-slate-700 mb-1">
+                        <label className="block text-[11px] font-semibold text-ink-700 mb-1">
                           Work Email *
                         </label>
                         <input
@@ -652,7 +652,7 @@ export function ChatWidget() {
                           value={visitorEmail}
                           onChange={(e) => setVisitorEmail(e.target.value)}
                           placeholder="name@company.com"
-                          className="w-full px-3 py-2 text-xs border border-slate-300 rounded-lg focus:outline-none focus:border-teal-700"
+                          className="w-full px-3 py-2 text-xs border border-line-300 rounded-lg focus:outline-none focus:border-accent-700"
                         />
                       </div>
                     </div>
@@ -660,7 +660,7 @@ export function ChatWidget() {
 
                   <div className="grid grid-cols-2 gap-2.5">
                     <div>
-                      <label className="block text-[11px] font-semibold text-slate-700 mb-1">
+                      <label className="block text-[11px] font-semibold text-ink-700 mb-1">
                         Preferred Date *
                       </label>
                       <input
@@ -668,11 +668,11 @@ export function ChatWidget() {
                         required
                         value={meetingDate}
                         onChange={(e) => setMeetingDate(e.target.value)}
-                        className="w-full px-2.5 py-2 text-xs border border-slate-300 rounded-lg focus:outline-none focus:border-teal-700"
+                        className="w-full px-2.5 py-2 text-xs border border-line-300 rounded-lg focus:outline-none focus:border-accent-700"
                       />
                     </div>
                     <div>
-                      <label className="block text-[11px] font-semibold text-slate-700 mb-1">
+                      <label className="block text-[11px] font-semibold text-ink-700 mb-1">
                         Preferred Time *
                       </label>
                       <input
@@ -680,13 +680,13 @@ export function ChatWidget() {
                         required
                         value={meetingTime}
                         onChange={(e) => setMeetingTime(e.target.value)}
-                        className="w-full px-2.5 py-2 text-xs border border-slate-300 rounded-lg focus:outline-none focus:border-teal-700"
+                        className="w-full px-2.5 py-2 text-xs border border-line-300 rounded-lg focus:outline-none focus:border-accent-700"
                       />
                     </div>
                   </div>
 
                   <div>
-                    <label className="block text-[11px] font-semibold text-slate-700 mb-1">
+                    <label className="block text-[11px] font-semibold text-ink-700 mb-1">
                       Timezone *
                     </label>
                     <input
@@ -695,7 +695,7 @@ export function ChatWidget() {
                       maxLength={80}
                       value={meetingTimezone}
                       onChange={(e) => setMeetingTimezone(e.target.value)}
-                      className="w-full px-3 py-2 text-xs border border-slate-300 rounded-lg focus:outline-none focus:border-teal-700"
+                      className="w-full px-3 py-2 text-xs border border-line-300 rounded-lg focus:outline-none focus:border-accent-700"
                     />
                     <datalist id="hs-timezones">
                       {COMMON_TIMEZONES.map((tz) => (
@@ -705,7 +705,7 @@ export function ChatWidget() {
                   </div>
 
                   <div>
-                    <label className="block text-[11px] font-semibold text-slate-700 mb-1">
+                    <label className="block text-[11px] font-semibold text-ink-700 mb-1">
                       Topic (optional)
                     </label>
                     <input
@@ -714,7 +714,7 @@ export function ChatWidget() {
                       value={meetingTopic}
                       onChange={(e) => setMeetingTopic(e.target.value)}
                       placeholder="e.g. Monthly bookkeeping for UK Ltd"
-                      className="w-full px-3 py-2 text-xs border border-slate-300 rounded-lg focus:outline-none focus:border-teal-700"
+                      className="w-full px-3 py-2 text-xs border border-line-300 rounded-lg focus:outline-none focus:border-accent-700"
                     />
                   </div>
 
@@ -727,13 +727,13 @@ export function ChatWidget() {
                   </button>
 
                   {/* Optional Cal.com link button */}
-                  <div className="pt-2 border-t border-slate-200">
+                  <div className="pt-2 border-t border-line-200">
                     {calComUrl ? (
                       <a
                         href={calComUrl}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="w-full inline-flex items-center justify-center gap-1.5 py-2 text-xs font-medium text-[#0B1F3A] bg-slate-100 hover:bg-slate-200 rounded-lg"
+                        className="w-full inline-flex items-center justify-center gap-1.5 py-2 text-xs font-medium text-navy-900 bg-paper-100 hover:bg-paper-200 rounded-lg"
                       >
                         Book Directly via Cal.com
                         <ExternalLink className="h-3.5 w-3.5" aria-hidden="true" />
@@ -743,13 +743,13 @@ export function ChatWidget() {
                         <button
                           type="button"
                           onClick={() => setShowCalPlaceholderNote((prev) => !prev)}
-                          className="w-full inline-flex items-center justify-center gap-1.5 py-2 text-xs font-medium text-slate-700 bg-slate-100 hover:bg-slate-200 rounded-lg"
+                          className="w-full inline-flex items-center justify-center gap-1.5 py-2 text-xs font-medium text-ink-700 bg-paper-100 hover:bg-paper-200 rounded-lg"
                         >
                           [Cal.com Link Placeholder]
                           <ExternalLink className="h-3.5 w-3.5" aria-hidden="true" />
                         </button>
                         {showCalPlaceholderNote && (
-                          <p className="text-[11px] text-slate-500 leading-snug">
+                          <p className="text-[11px] text-ink-500 leading-snug">
                             Optional: Add your Cal.com scheduling URL as{' '}
                             <span className="font-mono">VITE_CALCOM_URL</span> to activate instant
                             self-booking here.
@@ -767,17 +767,17 @@ export function ChatWidget() {
           {viewMode === 'chat' && !conversation && (
             <form onSubmit={handleStartChat} className="flex-1 overflow-y-auto p-4 space-y-3">
               {deletedSuccess && (
-                <div className="p-2.5 rounded-lg bg-teal-50 border border-teal-200 text-xs text-teal-900">
+                <div className="p-2.5 rounded-lg bg-accent-50 border border-accent-200 text-xs text-accent-900">
                   Your previous chat history has been permanently deleted.
                 </div>
               )}
 
-              <p className="text-xs text-slate-600 leading-relaxed">
+              <p className="text-xs text-ink-600 leading-relaxed">
                 Enter your name and email to start a real-time chat with our Kathmandu team.
               </p>
 
               <div>
-                <label className="block text-[11px] font-semibold text-slate-700 mb-1">
+                <label className="block text-[11px] font-semibold text-ink-700 mb-1">
                   Your Name *
                 </label>
                 <input
@@ -787,12 +787,12 @@ export function ChatWidget() {
                   value={visitorName}
                   onChange={(e) => setVisitorName(e.target.value)}
                   placeholder="e.g. David Patel"
-                  className="w-full px-3 py-2 text-xs border border-slate-300 rounded-lg focus:outline-none focus:border-teal-700"
+                  className="w-full px-3 py-2 text-xs border border-line-300 rounded-lg focus:outline-none focus:border-accent-700"
                 />
               </div>
 
               <div>
-                <label className="block text-[11px] font-semibold text-slate-700 mb-1">
+                <label className="block text-[11px] font-semibold text-ink-700 mb-1">
                   Work Email *
                 </label>
                 <input
@@ -802,12 +802,12 @@ export function ChatWidget() {
                   value={visitorEmail}
                   onChange={(e) => setVisitorEmail(e.target.value)}
                   placeholder="david@company.co.uk"
-                  className="w-full px-3 py-2 text-xs border border-slate-300 rounded-lg focus:outline-none focus:border-teal-700"
+                  className="w-full px-3 py-2 text-xs border border-line-300 rounded-lg focus:outline-none focus:border-accent-700"
                 />
               </div>
 
               <div>
-                <label className="block text-[11px] font-semibold text-slate-700 mb-1">
+                <label className="block text-[11px] font-semibold text-ink-700 mb-1">
                   How can we help? *
                 </label>
                 <textarea
@@ -817,7 +817,7 @@ export function ChatWidget() {
                   value={openingMessage}
                   onChange={(e) => setOpeningMessage(e.target.value)}
                   placeholder="Ask about bookkeeping, Xero/QuickBooks support, or monthly pricing..."
-                  className="w-full px-3 py-2 text-xs border border-slate-300 rounded-lg focus:outline-none focus:border-teal-700"
+                  className="w-full px-3 py-2 text-xs border border-line-300 rounded-lg focus:outline-none focus:border-accent-700"
                 />
               </div>
 
@@ -833,7 +833,7 @@ export function ChatWidget() {
 
           {viewMode === 'chat' && conversation && (
             <>
-              <div className="flex-1 overflow-y-auto p-3.5 space-y-2.5 bg-slate-50">
+              <div className="flex-1 overflow-y-auto p-3.5 space-y-2.5 bg-paper-50">
                 {messages.map((msg) => {
                   const isVisitor = msg.senderRole === 'visitor';
                   return (
@@ -841,14 +841,14 @@ export function ChatWidget() {
                       key={msg.id}
                       className={`flex flex-col ${isVisitor ? 'items-end' : 'items-start'}`}
                     >
-                      <span className="text-[10px] text-slate-500 mb-0.5 px-1">
+                      <span className="text-[10px] text-ink-500 mb-0.5 px-1">
                         {isVisitor ? 'You' : 'Hisab Sutra'} · {formatMessageTime(msg.createdAt)}
                       </span>
                       <div
                         className={`max-w-[85%] rounded-xl px-3 py-2 text-xs leading-relaxed whitespace-pre-wrap ${
                           isVisitor
                             ? 'bg-[#0B1F3A] text-white'
-                            : 'bg-white border border-slate-200 text-slate-800'
+                            : 'bg-surface border border-line-200 text-ink-800'
                         }`}
                       >
                         {msg.text}
@@ -860,8 +860,8 @@ export function ChatWidget() {
               </div>
 
               {conversation.status === 'closed' ? (
-                <div className="p-3 border-t border-slate-200 bg-white text-center space-y-2 shrink-0">
-                  <p className="text-xs text-slate-600">This chat has been marked as resolved.</p>
+                <div className="p-3 border-t border-line-200 bg-surface text-center space-y-2 shrink-0">
+                  <p className="text-xs text-ink-600">This chat has been marked as resolved.</p>
                   <button
                     type="button"
                     onClick={() => {
@@ -882,7 +882,7 @@ export function ChatWidget() {
               ) : (
                 <form
                   onSubmit={handleSendReply}
-                  className="p-2.5 border-t border-slate-200 bg-white flex items-center gap-2 shrink-0"
+                  className="p-2.5 border-t border-line-200 bg-surface flex items-center gap-2 shrink-0"
                 >
                   <input
                     type="text"
@@ -891,7 +891,7 @@ export function ChatWidget() {
                     onChange={(e) => setReplyText(e.target.value)}
                     placeholder="Type a message..."
                     aria-label="Chat message"
-                    className="flex-1 px-3 py-2 text-xs border border-slate-300 rounded-lg focus:outline-none focus:border-teal-700"
+                    className="flex-1 px-3 py-2 text-xs border border-line-300 rounded-lg focus:outline-none focus:border-accent-700"
                   />
                   <button
                     type="submit"
