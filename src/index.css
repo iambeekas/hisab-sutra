@@ -9,8 +9,70 @@
   --color-navy-900: #0b1f3a;
   --color-navy-800: #132f54;
 
+  /* Semantic colours: these flip in dark mode (see .dark below) */
+  --color-surface: #ffffff;
+  --color-paper-50: #f8fafc;
+  --color-paper-100: #f1f5f9;
+  --color-paper-200: #e2e8f0;
+  --color-line-100: #f1f5f9;
+  --color-line-200: #e2e8f0;
+  --color-line-300: #cbd5e1;
+  --color-ink-500: #64748b;
+  --color-ink-600: #475569;
+  --color-ink-700: #334155;
+  --color-ink-800: #1e293b;
+  --color-ink-900: #0f172a;
+  --color-accent-50: #f0fdfa;
+  --color-accent-200: #99f6e4;
+  --color-accent-700: #0f766e;
+  --color-accent-800: #115e59;
+  --color-accent-900: #134e4a;
+  --color-danger-bg: #fef2f2;
+  --color-danger-line: #fecaca;
+  --color-danger-fg: #b91c1c;
+  --color-warn-bg: #fffbeb;
+  --color-warn-line: #fde68a;
+  --color-warn-fg: #92400e;
+  --color-ok-bg: #ecfdf5;
+  --color-ok-line: #a7f3d0;
+  --color-ok-fg: #047857;
+
   --shadow-card: 0 1px 2px rgb(11 31 58 / 0.05), 0 14px 32px -18px rgb(11 31 58 / 0.2);
   --shadow-lift: 0 2px 4px rgb(11 31 58 / 0.06), 0 22px 44px -20px rgb(11 31 58 / 0.32);
+}
+
+/* Class-based dark mode (toggled on <html>) */
+@custom-variant dark (&:where(.dark, .dark *));
+
+.dark {
+  color-scheme: dark;
+  --color-navy-900: #e6edf7;
+  --color-surface: #0f1b2e;
+  --color-paper-50: #08111f;
+  --color-paper-100: #12223a;
+  --color-paper-200: #1b2d49;
+  --color-line-100: #172844;
+  --color-line-200: #22344f;
+  --color-line-300: #31486a;
+  --color-ink-500: #94a3b8;
+  --color-ink-600: #a9b6c8;
+  --color-ink-700: #c3cddb;
+  --color-ink-800: #dbe3ee;
+  --color-ink-900: #f1f5f9;
+  --color-accent-50: #0d2b2b;
+  --color-accent-200: #115e59;
+  --color-accent-700: #5eead4;
+  --color-accent-800: #99f6e4;
+  --color-accent-900: #ccfbf1;
+  --color-danger-bg: #3b1318;
+  --color-danger-line: #7f1d1d;
+  --color-danger-fg: #fca5a5;
+  --color-warn-bg: #3a2a0c;
+  --color-warn-line: #78561a;
+  --color-warn-fg: #fcd34d;
+  --color-ok-bg: #0b2e22;
+  --color-ok-line: #14532d;
+  --color-ok-fg: #6ee7b7;
 }
 
 @layer base {
@@ -45,7 +107,7 @@
 
 @layer components {
   .card {
-    background: #fff;
+    background: var(--color-surface);
     border: 1px solid rgb(15 23 42 / 0.08);
     border-radius: 1rem;
     box-shadow: var(--shadow-card);
@@ -82,11 +144,11 @@
     gap: 0.5rem;
     border-radius: 9999px;
     border: 1px solid rgb(15 118 110 / 0.22);
-    background: #f0fdfa;
+    background: var(--color-accent-50);
     padding: 0.3rem 0.8rem;
     font-size: 0.75rem;
     font-weight: 600;
-    color: #115e59;
+    color: var(--color-accent-800);
   }
 
   .bg-hero {
@@ -108,4 +170,70 @@
 
 .tabular-nums {
   font-variant-numeric: tabular-nums;
+}
+
+/* ---- Dark mode refinements (layered so utility classes such as ring-* and shadow-* still win) ---- */
+@layer components {
+  .dark .card {
+    border-color: rgb(255 255 255 / 0.08);
+    box-shadow: 0 1px 2px rgb(0 0 0 / 0.4), 0 14px 32px -18px rgb(0 0 0 / 0.7);
+  }
+  .dark .card-hover:hover {
+    border-color: rgb(94 234 212 / 0.4);
+    box-shadow: 0 2px 4px rgb(0 0 0 / 0.5), 0 22px 44px -20px rgb(0 0 0 / 0.8);
+  }
+  .dark .btn-primary {
+    background: #2dd4bf;
+    color: #04141f;
+    box-shadow: 0 1px 2px rgb(0 0 0 / 0.4);
+  }
+  .dark .btn-primary:hover {
+    background: #5eead4;
+    box-shadow: 0 10px 22px -10px rgb(45 212 191 / 0.45);
+  }
+  .dark .eyebrow {
+    border-color: rgb(94 234 212 / 0.25);
+  }
+  .dark .bg-hero {
+    background-color: #08111f;
+    background-image:
+      radial-gradient(60rem 28rem at 85% -10%, rgb(45 212 191 / 0.16), transparent 60%),
+      radial-gradient(48rem 24rem at -10% 10%, rgb(56 99 170 / 0.18), transparent 60%),
+      linear-gradient(rgb(255 255 255 / 0.03) 1px, transparent 1px),
+      linear-gradient(90deg, rgb(255 255 255 / 0.03) 1px, transparent 1px);
+  }
+  .dark img {
+    filter: brightness(0.92);
+  }
+}
+
+/* ---- Right-to-left (Arabic) ---- */
+[dir="rtl"] svg.lucide-arrow-right,
+[dir="rtl"] svg.lucide-chevron-right,
+[dir="rtl"] svg.lucide-arrow-up-right {
+  transform: scaleX(-1);
+}
+[dir="rtl"] .tabular-nums,
+[dir="rtl"] .font-mono {
+  direction: ltr;
+  unicode-bidi: isolate;
+}
+
+/* ---- Fonts for Arabic and Nepali ---- */
+:lang(ar) {
+  font-family: "Noto Sans Arabic", "Public Sans", ui-sans-serif, system-ui, sans-serif;
+}
+:lang(ar) h1, :lang(ar) h2, :lang(ar) h3, :lang(ar) h4 {
+  font-family: "Noto Sans Arabic", "Plus Jakarta Sans", ui-sans-serif, system-ui, sans-serif;
+  letter-spacing: 0;
+}
+:lang(ne) {
+  font-family: "Noto Sans Devanagari", "Public Sans", ui-sans-serif, system-ui, sans-serif;
+}
+:lang(ne) h1, :lang(ne) h2, :lang(ne) h3, :lang(ne) h4 {
+  font-family: "Noto Sans Devanagari", "Plus Jakarta Sans", ui-sans-serif, system-ui, sans-serif;
+  letter-spacing: 0;
+}
+:lang(ar) .section-heading, :lang(ne) .section-heading {
+  letter-spacing: 0;
 }
