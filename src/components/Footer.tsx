@@ -25,6 +25,13 @@ export function Footer() {
             <p className="text-xs text-slate-400 pt-1">
               Kathmandu, Nepal
             </p>
+
+            <a
+              href="mailto:hisabsutra@bikasb.com.np"
+              className="inline-flex text-sm text-slate-300 hover:text-white transition-colors"
+            >
+              hisabsutra@bikasb.com.np
+            </a>
           </div>
 
           <div className="md:col-span-2 space-y-3">
