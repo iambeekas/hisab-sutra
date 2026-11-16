@@ -160,8 +160,7 @@ export function PrivacyPage() {
           <p>
             Hisab Sutra (&ldquo;we&rdquo;, &ldquo;our&rdquo;, &ldquo;us&rdquo;) is an accounting,
             bookkeeping, and financial data entry outsourcing firm located in [Kathmandu, Nepal
-            Office Address Placeholder]. Contact our privacy lead at [privacy@hisabsutra.com
-            Placeholder].
+            Office Address Placeholder]. Contact our privacy lead at hisabsutra@bikasb.com.np.
           </p>
         </section>
 
