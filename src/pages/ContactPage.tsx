@@ -48,6 +48,16 @@ export function ContactPage() {
                 </div>
 
                 <div className="flex items-start gap-3">
+                  <Mail className="h-4 w-4 text-teal-700 mt-1 shrink-0" aria-hidden="true" />
+                  <div>
+                    <p className="font-semibold text-[#0B1F3A]">Email</p>
+                    <a href="mailto:hisabsutra@bikasb.com.np" className="text-teal-800 hover:text-teal-900 underline underline-offset-2">
+                      hisabsutra@bikasb.com.np
+                    </a>
+                  </div>
+                </div>
+
+                <div className="flex items-start gap-3">
                   <Clock className="h-4 w-4 text-teal-700 mt-1 shrink-0" aria-hidden="true" />
                   <div>
                     <p className="font-semibold text-[#0B1F3A]">Operating Overlap</p>
