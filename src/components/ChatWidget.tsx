@@ -502,7 +502,7 @@ export function ChatWidget() {
       {isOpen && (
         <section
           aria-label="Hisab Sutra Live Chat"
-          className="w-[370px] max-w-[calc(100vw-2rem)] h-[540px] max-h-[82vh] card shadow-2xl flex flex-col overflow-hidden"
+          className="w-[370px] max-w-[calc(100vw-2rem)] h-[min(540px,calc(100dvh-2rem))] max-h-[calc(100dvh-2rem)] min-h-0 card shadow-2xl flex flex-col overflow-hidden"
         >
           {/* Header */}
           <header className="bg-[#0B1F3A] text-white px-4 py-3 flex items-center justify-between gap-2 shrink-0">
@@ -553,7 +553,7 @@ export function ChatWidget() {
           {/* Mandatory Security Notice */}
           <div className="px-3.5 py-2 bg-warn-bg border-b border-warn-line text-[11px] text-warn-fg leading-snug shrink-0">
             Please do not share bank details, passwords or documents here. Send documents by email
-            to <span className="font-semibold">[hello@hisabsutra.com]</span>.
+            to <a href="mailto:hisabsutra@bikasb.com.np" className="font-semibold underline underline-offset-2">hisabsutra@bikasb.com.np</a>.
           </div>
 
           {/* Error Banner */}
@@ -597,7 +597,7 @@ export function ChatWidget() {
 
           {/* VIEW: Request a Meeting */}
           {viewMode === 'meeting' && (
-            <div className="flex-1 overflow-y-auto p-4 space-y-4">
+            <div className="flex-1 min-h-0 overflow-y-auto overscroll-contain p-4 space-y-4">
               {meetingSuccess ? (
                 <div className="p-4 rounded-lg bg-accent-50 border border-accent-200 space-y-3">
                   <div className="flex items-center gap-2 text-accent-900 font-semibold text-sm">
@@ -765,7 +765,7 @@ export function ChatWidget() {
 
           {/* VIEW: Active Chat or Pre-Chat Form */}
           {viewMode === 'chat' && !conversation && (
-            <form onSubmit={handleStartChat} className="flex-1 overflow-y-auto p-4 space-y-3">
+            <form onSubmit={handleStartChat} className="flex-1 min-h-0 overflow-y-auto overscroll-contain p-4 space-y-3">
               {deletedSuccess && (
                 <div className="p-2.5 rounded-lg bg-accent-50 border border-accent-200 text-xs text-accent-900">
                   Your previous chat history has been permanently deleted.
@@ -833,7 +833,7 @@ export function ChatWidget() {
 
           {viewMode === 'chat' && conversation && (
             <>
-              <div className="flex-1 overflow-y-auto p-3.5 space-y-2.5 bg-paper-50">
+              <div className="flex-1 min-h-0 overflow-y-auto overscroll-contain p-3.5 space-y-2.5 bg-paper-50">
                 {messages.map((msg) => {
                   const isVisitor = msg.senderRole === 'visitor';
                   return (
